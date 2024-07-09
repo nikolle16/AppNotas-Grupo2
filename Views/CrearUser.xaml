@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Notas___Grupo_2.Views.CrearUser"
+             BackgroundColor="Beige">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="20">
+            <Label
+                Margin="0,20,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Crear Usuario" />
+            
+            <Image
+                x:Name="imgFoto"
+                Margin="0,0,0,0"
+                Aspect="AspectFit"
+                HeightRequest="150"
+                HorizontalOptions="CenterAndExpand"
+                Source="avatar.png"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="150" />
+
+            <ImageButton
+                x:Name="btnfoto"
+                Margin="0,-40,0,0"
+                WidthRequest="200"
+                HeightRequest="50"
+                Source="aggfoto.png"
+                HorizontalOptions="End"
+                Clicked="btnfoto_Clicked"/>
+
+            <Label
+                Margin="0,10,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Nombre:"
+                VerticalOptions="Center" />
+
+            <Entry
+                x:Name="txtNombre"
+                Margin="15,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="StartAndExpand"
+                Keyboard="Text"
+                Placeholder="Nombre y Apellido"
+                VerticalOptions="Center" />
+
+            <Label
+                Margin="0,10,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Correo:"
+                VerticalOptions="Center" />
+
+            <Entry
+                x:Name="txtCorreo"
+                Margin="15,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="StartAndExpand"
+                Keyboard="Text"
+                Placeholder="user@gmail.com"
+                VerticalOptions="Center" />
+
+            <Label 
+                Margin="0,10,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Contraseña:"
+                VerticalOptions="Center"/>
+
+            <Entry 
+                x:Name="txtPassword"
+                Margin="15,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="StartAndExpand"
+                Keyboard="Text"
+                Placeholder="Ingresa una contraseña"
+                VerticalOptions="Center" 
+                IsPassword="True"/>
+            
+            <Button
+                x:Name="btnCrear"
+                Margin="0,20,0,0"
+                Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
+                WidthRequest="150"
+                HeightRequest="50"
+                Clicked="btnCrear_Clicked"
+                HorizontalOptions="Start"
+                SemanticProperties.Hint="Crear"
+                Text="Crear"/>
+
+            <Button
+                x:Name="btnRegresar"
+                Margin="0,-70,0,10"
+                Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
+                WidthRequest="150"
+                HeightRequest="50"
+                Clicked="btnRegresar_Clicked"
+                HorizontalOptions="End"
+                SemanticProperties.Hint="Regresar a Menu Principal"
+                Text="Regresar" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

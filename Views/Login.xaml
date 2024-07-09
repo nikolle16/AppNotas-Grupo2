@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Notas___Grupo_2.Views.Login"
+             BackgroundColor="Beige">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="30,0" Spacing="20">
+            <Label
+                Margin="0,20,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Inicio Sesion" />
+
+            <Image
+                Margin="0,-40,0,0"
+                Aspect="AspectFit"
+                HeightRequest="200"
+                WidthRequest="200" 
+                Source="logouth.png"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+
+            <Label
+                Margin="0,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Correo:"
+                VerticalOptions="Center" />
+
+            <Entry
+                x:Name="txtCorreo"
+                Margin="15,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Keyboard="Text"
+                Placeholder="user@gmail.com"
+                VerticalOptions="Center" />
+
+            <Label 
+                Margin="0,10,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Contraseña:"
+                VerticalOptions="Center"/>
+
+            <Entry 
+                x:Name="txtPassword"
+                Margin="15,0,0,10"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Keyboard="Text"
+                Placeholder="Ingresa una contraseña"
+                VerticalOptions="Center" 
+                IsPassword="True"/>
+
+            <Button
+                x:Name="btnIniSesion"
+                Margin="0,20,0,0"
+                Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
+                WidthRequest="200"
+                HeightRequest="50"
+                Clicked="btnIniSesion_Clicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Inicia Sesion"
+                Text="Iniciar Sesion"/>
+
+            <Label 
+                Text="Registrarse"
+                TextColor="Gray"
+                HorizontalOptions="Start"
+                Margin="10,20,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label 
+                Text="Iniciar como invitado"
+                TextColor="Gray"
+                HorizontalOptions="End"
+                Margin="0,-40,10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

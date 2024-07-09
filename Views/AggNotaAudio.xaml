@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Notas___Grupo_2.Views.AggNotaAudio"
+             BackgroundColor="Beige">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="20">
+            <Label
+                Margin="0,20,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Agregar Nota de Audio" />
+
+            <Button
+                x:Name="btnRegresar"
+                Margin="0,0,0,10"
+                Background="#00532c" TextColor="White" FontAttributes="Bold"
+                WidthRequest="200"
+                HeightRequest="50"
+                Clicked="btnRegresar_Clicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Regresar a Menu Principal"
+                Text="Regresar" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
