@@ -1,3 +1,5 @@
+using BCrypt.Net;
+
 namespace App_Notas___Grupo_2.Views;
 
 public partial class Login : ContentPage
@@ -26,9 +28,9 @@ public partial class Login : ContentPage
             return false;
         }
 
-        var user = users.FirstOrDefault(u => u.correo == correo && u.password == password);
+        var user = users.FirstOrDefault(u => u.correo == correo);
 
-        if (user != null)
+        if (user != null && BCrypt.Net.BCrypt.Verify(password, user.password))
         {
             return true;
         }

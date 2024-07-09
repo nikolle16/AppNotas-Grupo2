@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using BCrypt.Net;
 
 namespace App_Notas___Grupo_2.Views;
 
@@ -84,7 +85,6 @@ public partial class CrearUser : ContentPage
 
     private async void btnCrear_Clicked(object sender, EventArgs e)
     {
-        string Foto = GetImg64();
         string Nombre = txtNombre.Text;
         string Correo = txtCorreo.Text;
         string Password = txtPassword.Text;
@@ -111,11 +111,13 @@ public partial class CrearUser : ContentPage
             return;
         }
 
+        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
+
         var user = new Models.User
         {
             nombre = txtNombre.Text,
             correo = txtCorreo.Text,
-            password = txtPassword.Text,
+            password = hashedPassword,
             foto = GetImg64()
         };
 
