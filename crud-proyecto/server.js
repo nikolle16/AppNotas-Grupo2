@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -8,12 +9,10 @@ const port = 6000;
 
 app.use(cors());
 app.use(bodyParser.json());
-
 app.use(bodyParser.json({ limit: '50mb' }));
-// Increase the limit to 50mb for URL-encoded payloads
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-//Configuracion de la base de datos
+// Configuración de la base de datos
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -22,21 +21,37 @@ const db = mysql.createConnection({
 });
 
 db.connect((err) => {
-    if(err){
-        console.log('Error no esta conectado a la base de datos');
+    if (err) {
+        console.log('Error no está conectado a la base de datos');
         return;
     }
-    console.log('Conectado a la base de datos')
+    console.log('Conectado a la base de datos');
 });
 
-//USER
-//Method Create
-app.post('/api/user', (req, res) => {
-    const {nombre, correo, password, foto} = req.body;
-    const consulta = 'INSERT INTO USER (nombre, correo, password, foto) VALUES (?, ?, ?, ?)';
+const SECRET_TOKEN = process.env.SECRET_TOKEN;
 
-    db.query(consulta, [nombre, correo, password, foto], (err,result) => {
-        if(err){
+// Middleware para verificar el Bearer Token
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    console.log(`Received Token: ${token}`);
+    console.log(`Expected Token: ${SECRET_TOKEN}`);
+
+    if (!token || token !== SECRET_TOKEN) {
+        return res.sendStatus(403); // Forbidden
+    }
+
+    next();
+};
+
+// Endpoint para crear usuario (no protegido)
+app.post('/api/user', (req, res) => {
+    const { nombre, correo, password, foto } = req.body;
+    const consulta = 'INSERT INTO user (nombre, correo, password, foto) VALUES (?, ?, ?, ?)';
+
+    db.query(consulta, [nombre, correo, password, foto], (err, result) => {
+        if (err) {
             res.status(500).send(err);
             return;
         }
@@ -44,12 +59,12 @@ app.post('/api/user', (req, res) => {
     });
 });
 
-//Read
-app.get('/api/user',(req,res) => {
+// Endpoint para leer usuarios (protegido)
+app.get('/api/user', authenticateToken, (req, res) => {
     const consulta = 'SELECT * FROM user';
 
-    db.query(consulta,(err,resultado) => {
-        if(err){
+    db.query(consulta, (err, resultado) => {
+        if (err) {
             res.status(500).send(err);
             return;
         }
@@ -57,15 +72,15 @@ app.get('/api/user',(req,res) => {
     });
 });
 
-//Update
-app.put('/api/user/:id',(req,res) => {
-    const {id} = req.params;
-    const {nombre, correo, password, foto} = req.body;
+// Endpoint para actualizar usuario (protegido)
+app.put('/api/user/:id', authenticateToken, (req, res) => {
+    const { id } = req.params;
+    const { nombre, correo, password, foto } = req.body;
 
-    const consulta = 'UPDATE user set nombre = ?,correo = ?,password = ?,foto = ?';
+    const consulta = 'UPDATE user SET nombre = ?, correo = ?, password = ?, foto = ? WHERE id = ?';
 
-    db.query(consulta, [nombre, correo, password, foto], (err,result) => {
-        if(err){
+    db.query(consulta, [nombre, correo, password, foto, id], (err, result) => {
+        if (err) {
             res.status(500).send(err);
             return;
         }
@@ -73,19 +88,20 @@ app.put('/api/user/:id',(req,res) => {
     });
 });
 
-//Delete
-app.delete('/api/user/:id', (req, res) => {
+// Endpoint para eliminar usuario (protegido)
+app.delete('/api/user/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM user WHERE id = ?';
-    db.query(query, [id], (err, result) => {
-      if (err) {
-        res.status(500).send(err);
-        return;
-      }
-      res.status(200).send(result);
+    const consulta = 'DELETE FROM user WHERE id = ?';
+
+    db.query(consulta, [id], (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.status(200).send(result);
     });
 });
 
-app.listen(port, ()=> {
-    console.log(`Servidor ejecutandose en http://192.168.0.13:${port}`);
+app.listen(port, () => {
+    console.log(`Servidor ejecutándose en http://192.168.0.7:${port}`);
 });

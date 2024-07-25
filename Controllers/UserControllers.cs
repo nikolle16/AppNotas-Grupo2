@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -9,44 +10,41 @@ namespace App_Notas___Grupo_2.Controllers
 {
     public class UserControllers
     {
-        //Crud
-        //Create
+        // Create
         public async static Task<int> Create(Models.User emple)
         {
             try
             {
-                String jsonObject = JsonConvert.SerializeObject(emple);
-                System.Net.Http.StringContent contenido = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+                string jsonObject = JsonConvert.SerializeObject(emple);
+                StringContent contenido = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = null;
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Config.Config.BearerToken);
 
-                    response = await client.PostAsync(Config.Config.EndPointCreate, contenido);
+                    HttpResponseMessage response = await client.PostAsync(Config.Config.EndPointCreate, contenido);
 
-                    if (response != null)
+                    if (response.IsSuccessStatusCode)
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var result = response.Content.ReadAsStringAsync().Result;
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Ha Ocurrido un Error: {response.ReasonPhrase}");
-                            return -1;
-                        }
+                        var result = await response.Content.ReadAsStringAsync();
+                        // Puedes manejar el resultado aquí si es necesario
+                        return 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ha Ocurrido un Error: {response.ReasonPhrase}");
+                        return -1;
                     }
                 }
-                return 1;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ha Ocurrido un Error: {ex.ToString()}");
+                Console.WriteLine($"Ha Ocurrido un Error: {ex}");
                 return -1;
             }
         }
 
-        //Read
+        // Read
         public async static Task<List<Models.User>> Get()
         {
             List<Models.User> userList = new List<Models.User>();
@@ -54,35 +52,30 @@ namespace App_Notas___Grupo_2.Controllers
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = null;
-                    response = await client.GetAsync(Config.Config.EndPointList);
-                    if (response != null)
-                    {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var result = response.Content.ReadAsStringAsync().Result;
-                            try
-                            {
-                                userList = JsonConvert.DeserializeObject<List<Models.User>>(result);
-                            }
-                            catch (JsonException jex)
-                            {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Config.Config.BearerToken);
 
-                            }
-                        }
+                    HttpResponseMessage response = await client.GetAsync(Config.Config.EndPointList);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        userList = JsonConvert.DeserializeObject<List<Models.User>>(result);
                     }
-                    return userList;
+                    else
+                    {
+                        Console.WriteLine($"Error al obtener usuarios: {response.ReasonPhrase}");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                Console.WriteLine($"Ha Ocurrido un Error: {ex}");
             }
+            return userList;
         }
 
-        //Update
+        // Update (Por implementar)
 
-
-        //Delete
+        // Delete (Por implementar)
     }
 }
