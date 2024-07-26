@@ -44,6 +44,22 @@ namespace App_Notas___Grupo_2.Views
             }
         }
 
+        //Preferences
+        public void SavePreferences(string key, string value)
+        {
+            Preferences.Set(key, value);
+        }
+
+        public void GetPreferences(string key, string value)
+        {
+            Preferences.Get(key, value);
+        }
+
+        public void RemovePreferences(string key)
+        {
+            Preferences.Remove(key);
+        }
+
         private async void btnIniSesion_Clicked(object sender, EventArgs e)
         {
             string Correo = txtCorreo.Text;
@@ -53,6 +69,8 @@ namespace App_Notas___Grupo_2.Views
 
             if (userValido)
             {
+                SavePreferences("username", Correo);
+                SavePreferences("password", Password);
                 await Navigation.PushAsync(new Principal());
             }
         }

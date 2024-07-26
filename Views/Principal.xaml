@@ -4,12 +4,48 @@
              x:Class="App_Notas___Grupo_2.Views.Principal"
              Title=""
              BackgroundColor="Beige">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Agregar Nota" Clicked="OnAgregarNotaClicked"/>
-    </ContentPage.ToolbarItems>
+
     <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="20">
-            
+        <VerticalStackLayout Padding="0,0">
+            <Frame
+                Grid.Column="1"
+                Margin="20,30,20,0"
+                BorderColor="Black"
+                BackgroundColor="Transparent"
+                CornerRadius="50"
+                Padding="1">
+                <SearchBar
+                x:Name="searchBar"
+                    Margin="0,0,0,0"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Background="Transparent"
+                    Placeholder="Buscar Lugares"
+                    PlaceholderColor="Black"
+                    />
+                <!-- SearchButtonPressed="searchBar_SearchButtonPressed" -->
+                <!-- TextChanged="searchBar_TextChanged" -->
+            </Frame>
+
+            <Frame
+                Margin="0,500,20,0"
+                WidthRequest="75"
+                HeightRequest="75"
+                CornerRadius="50"
+                BackgroundColor="Transparent"
+                BorderColor="Black"
+                HorizontalOptions="End">
+                <Button
+                    Text="+"
+                    TextColor="Beige"
+                    FontAttributes="Bold"
+                    FontSize="50"
+                    BackgroundColor="#2b0098"
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    CornerRadius="50"
+                    Clicked="OnAgregarNotaClicked"/>
+            </Frame>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
