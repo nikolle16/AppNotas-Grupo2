@@ -13,5 +13,7 @@ namespace App_Notas___Grupo_2.Models
         public string correo { get; set; }
         public string password { get; set; }
         public string foto { get; set; }
+
+        public ICollection<Note> Notes { get; set; }
     }
 }

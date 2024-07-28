@@ -4,22 +4,14 @@
              x:Class="App_Notas___Grupo_2.Views.AggNota"
              Title="Agregar nota"
              BackgroundColor="Beige">
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="20">
-            <ImageButton
-                Source="aggimagen.png"
-                HorizontalOptions="Center"
-                VerticalOptions="End"/>
-            <Button
-                x:Name="btnRegresar"
-                Margin="0,0,0,10"
-                Background="#00532c" TextColor="White" FontAttributes="Bold"
-                WidthRequest="200"
-                HeightRequest="50"
-                Clicked="btnRegresar_Clicked"
-                HorizontalOptions="Center"
-                SemanticProperties.Hint="Regresar a Menu Principal"
-                Text="Regresar" />  
-        </VerticalStackLayout>
-    </ScrollView>
+    
+    <StackLayout Padding="10">
+        <Entry x:Name="titleEntry" Placeholder="Título" />
+        <Editor x:Name="contentEditor" Placeholder="Contenido" HeightRequest="200" />
+        <Button Text="Seleccionar Imágenes" Clicked="OnSelectImagesButtonClicked" />
+        <ScrollView HeightRequest="200">
+            <StackLayout x:Name="imagesStackLayout" />
+        </ScrollView>
+        <Button Text="Guardar Nota" Clicked="OnSaveNoteButtonClicked" />
+    </StackLayout>
 </ContentPage>

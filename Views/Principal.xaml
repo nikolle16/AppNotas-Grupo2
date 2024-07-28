@@ -5,8 +5,11 @@
              Title=""
              BackgroundColor="Beige">
 
+
+
     <ScrollView>
         <VerticalStackLayout Padding="0,0">
+            
             <Frame
                 Grid.Column="1"
                 Margin="20,30,20,0"
@@ -26,6 +29,19 @@
                 <!-- SearchButtonPressed="searchBar_SearchButtonPressed" -->
                 <!-- TextChanged="searchBar_TextChanged" -->
             </Frame>
+            <ListView x:Name="NotasListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Content}" LineBreakMode="WordWrap" MaxLines="2"/>
+                                <Label Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Micro"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Frame
                 Margin="0,500,20,0"

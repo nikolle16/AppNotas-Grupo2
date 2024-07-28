@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using App_Notas___Grupo_2.Models;
+using App_Notas___Grupo_2.Services;
+
 namespace App_Notas___Grupo_2.Views;
 
 public partial class Principal : ContentPage
@@ -6,6 +12,25 @@ public partial class Principal : ContentPage
 	{
 		InitializeComponent();
 	}
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadNotas();
+    }
+
+    private async Task LoadNotas()
+    {
+        var userId = Preferences.Get("userId", null);
+        if (userId != null)
+        {
+            var notas = await NotaService.GetNotasAsync(userId);
+            NotasListView.ItemsSource = notas;
+        }
+        else
+        {
+            await DisplayAlert("Error", "No se pudo obtener el ID del usuario", "OK");
+        }
+    }
 
     private async void OnAgregarNotaClicked(object sender, EventArgs e)
     {

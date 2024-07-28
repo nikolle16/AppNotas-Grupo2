@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using App_Notas___Grupo_2.Controllers;
 
 namespace App_Notas___Grupo_2.Views
 {
@@ -17,7 +18,7 @@ namespace App_Notas___Grupo_2.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            users = await Controllers.UserControllers.Get();
+            users = await UserControllers.Get();
 
             txtCorreo.Text = string.Empty;
             txtPassword.Text = string.Empty;
@@ -35,6 +36,9 @@ namespace App_Notas___Grupo_2.Views
 
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.password))
             {
+                Console.WriteLine($"Usuario encontrado: {user.id}");
+                SavePreferences("userId", user.id.ToString()); // Guardar el userId en las preferencias
+                Console.WriteLine($"userId guardado en las preferencias: {user.id}");
                 return true;
             }
             else
@@ -44,20 +48,24 @@ namespace App_Notas___Grupo_2.Views
             }
         }
 
-        //Preferences
+        // Preferences
         public void SavePreferences(string key, string value)
         {
             Preferences.Set(key, value);
+            Console.WriteLine($"Preferencia guardada: {key} = {value}");
         }
 
-        public void GetPreferences(string key, string value)
+        public string GetPreferences(string key, string defaultValue)
         {
-            Preferences.Get(key, value);
+            var value = Preferences.Get(key, defaultValue);
+            Console.WriteLine($"Preferencia obtenida: {key} = {value}");
+            return value;
         }
 
         public void RemovePreferences(string key)
         {
             Preferences.Remove(key);
+            Console.WriteLine($"Preferencia eliminada: {key}");
         }
 
         private async void btnIniSesion_Clicked(object sender, EventArgs e)
