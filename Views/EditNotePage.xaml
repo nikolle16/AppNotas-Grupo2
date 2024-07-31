@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Notas___Grupo_2.Views.EditNotePage"
+             Title="EditNotePage">
+    <StackLayout Padding="10">
+        <Entry x:Name="titleEntry" Placeholder="Título" />
+        <Editor x:Name="contentEditor" Placeholder="Contenido" HeightRequest="200" />
+        <Button Text="Seleccionar Imágenes" Clicked="OnSelectImagesButtonClicked" />
+        <StackLayout x:Name="imagesStackLayout" />
+        <Button Text="Guardar Nota" Clicked="OnSaveNoteButtonClicked" />
+    </StackLayout>
+</ContentPage>

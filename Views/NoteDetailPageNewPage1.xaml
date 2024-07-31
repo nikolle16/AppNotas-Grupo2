@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Notas___Grupo_2.Views.NoteDetailPageNewPage1"
+             Title="Note Details">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <Label x:Name="ContentLabel" FontSize="18" Margin="0,10,0,0"/>
+            <StackLayout x:Name="ImagesStackLayout" Margin="0,10,0,0">
+                <!-- Aquí se agregarán las imágenes dinámicamente -->
+            </StackLayout>
+            <Button Text="Eliminar Nota" Clicked="OnDeleteNoteButtonClicked" BackgroundColor="Red" TextColor="White"/>
+            <Button Text="Editar Nota" Clicked="ButtonEditNote"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+

@@ -13,6 +13,10 @@ namespace App_Notas___Grupo_2.Config
         public static string EndPointCreateNote = "http://192.168.1.6:6000/api/note";
         public static string EndPointListNotes = "http://192.168.1.6:6000/api/note";
         public static string EndPointGetNotes = "http://192.168.1.6:6000/api/note";
+        public static string EndPointGetNote = "http://192.168.1.6:6000/api/note";
+        public static string EndPointUpdateNote = "http://192.168.1.6:6000/api/note";
+        public static string EndPointDeleteNote = "http://192.168.1.6:6000/api/note";
+
         public static string BearerToken = "brrr";
     }
 }

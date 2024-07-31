@@ -134,14 +134,9 @@ app.post('/api/note', (req, res) => {
     });
 });
 
-// Endpoint para leer notas y sus imágenes filtradas por user_id (protegido)
+// Endpoint para leer notas y sus imágenes (protegido)
 app.get('/api/note', authenticateToken, (req, res) => {
-    const userId = req.query.userId;
-
-    if (!userId) {
-        return res.status(400).json({ error: 'userId is required' });
-    }
-
+    const { userId } = req.query;
     const query = `
         SELECT n.id, n.title, n.content, n.created_at, i.id as image_id, i.image
         FROM notes n
@@ -176,8 +171,113 @@ app.get('/api/note', authenticateToken, (req, res) => {
     });
 });
 
+// Endpoint para leer una nota específica y sus imágenes (protegido)
+app.get('/api/note/:id', authenticateToken, (req, res) => {
+    const { id } = req.params;
+
+    const query = `
+        SELECT n.id, n.title, n.content, n.created_at, i.id as image_id, i.image
+        FROM notes n
+        LEFT JOIN images i ON n.id = i.note_id
+        WHERE n.id = ?
+    `;
+
+    db.query(query, [id], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).json({ message: 'Note not found' });
+            return;
+        }
+
+        const note = {
+            id: results[0].id,
+            title: results[0].title,
+            content: results[0].content,
+            created_at: results[0].created_at,
+            images: []
+        };
+
+        results.forEach(row => {
+            if (row.image_id) {
+                note.images.push(row.image.toString('base64'));
+            }
+        });
+
+        res.status(200).json(note);
+    });
+});
+
+// Endpoint para actualizar una nota con imágenes (protegido)
+app.put('/api/note/:id', authenticateToken, (req, res) => {
+    const { id } = req.params;
+    const { title, content, images } = req.body;
+
+    // Actualizar la nota en la base de datos
+    const noteQuery = 'UPDATE notes SET title = ?, content = ?, updated_at = NOW() WHERE id = ?';
+    db.query(noteQuery, [title, content, id], (err, result) => {
+        if (err) {
+            console.error('Error updating note:', err);
+            return res.status(500).json({ error: 'Error updating note' });
+        }
+
+        // Eliminar imágenes existentes para la nota
+        const deleteImagesQuery = 'DELETE FROM images WHERE note_id = ?';
+        db.query(deleteImagesQuery, [id], (err, result) => {
+            if (err) {
+                console.error('Error deleting images:', err);
+                return res.status(500).json({ error: 'Error deleting images' });
+            }
+
+            // Insertar las nuevas imágenes en la base de datos
+            if (images && images.length > 0) {
+                const imageQuery = 'INSERT INTO images (note_id, image) VALUES ?';
+                const imageValues = images.map(image => [id, Buffer.from(image, 'base64')]);
+
+                db.query(imageQuery, [imageValues], (err, result) => {
+                    if (err) {
+                        console.error('Error inserting images:', err);
+                        return res.status(500).json({ error: 'Error inserting images' });
+                    }
+
+                    res.status(200).json({ message: 'Note and images updated successfully' });
+                });
+            } else {
+                res.status(200).json({ message: 'Note updated successfully' });
+            }
+        });
+    });
+});
+
+// Endpoint para eliminar una nota y sus imágenes (protegido)
+app.delete('/api/note/:id', authenticateToken, (req, res) => {
+    const { id } = req.params;
+
+    // Eliminar las imágenes de la nota
+    const deleteImagesQuery = 'DELETE FROM images WHERE note_id = ?';
+    db.query(deleteImagesQuery, [id], (err, result) => {
+        if (err) {
+            console.error('Error deleting images:', err);
+            return res.status(500).json({ error: 'Error deleting images' });
+        }
+
+        // Eliminar la nota
+        const deleteNoteQuery = 'DELETE FROM notes WHERE id = ?';
+        db.query(deleteNoteQuery, [id], (err, result) => {
+            if (err) {
+                console.error('Error deleting note:', err);
+                return res.status(500).json({ error: 'Error deleting note' });
+            }
+
+            res.status(200).json({ message: 'Note and images deleted successfully' });
+        });
+    });
+});
+
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://192.168.1.6:${port}`);
 });
-
 

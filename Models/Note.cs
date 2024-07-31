@@ -12,6 +12,7 @@ namespace App_Notas___Grupo_2.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
+        public List<string> Images { get; set; }
 
         // Clave foránea
         public int UserId { get; set; }
