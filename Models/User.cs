@@ -15,5 +15,6 @@ namespace App_Notas___Grupo_2.Models
         public string foto { get; set; }
 
         public ICollection<Note> Notes { get; set; }
+        public ICollection<Audio> Audios { get; set; }
     }
 }

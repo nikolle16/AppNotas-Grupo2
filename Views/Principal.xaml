@@ -14,8 +14,7 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Padding="0,0">
-            
+        <VerticalStackLayout>
             <Frame
                 Grid.Column="1"
                 Margin="20,30,20,0"
@@ -35,15 +34,48 @@
                 <!-- SearchButtonPressed="searchBar_SearchButtonPressed" -->
                 <!-- TextChanged="searchBar_TextChanged" -->
             </Frame>
+
+            <Label
+                Text="Notas de texto e imagenes"/>
+
             <ListView x:Name="NotasListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <StackLayout 
+                                HeightRequest="60">
                                 <Label Text="{Binding Title}" FontAttributes="Bold"/>
                                 <Label Text="{Binding Content}" LineBreakMode="WordWrap" MaxLines="2"/>
                                 <Label Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Micro"/>
                             </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label
+                Text="Notas de audio"/>
+
+            <ListView x:Name="AudioListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding title}" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding audio}" FontAttributes="Italic" FontSize="Small" />
+                                <Label Grid.Row="2" Grid.Column="0" Text="{Binding fecha}" FontSize="Small" />
+                                <Button Grid.Row="3" Grid.Column="1" Text="Eliminar" Clicked="OnEliminarAudioClicked" CommandParameter="{Binding .}" VerticalOptions="Center" />
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

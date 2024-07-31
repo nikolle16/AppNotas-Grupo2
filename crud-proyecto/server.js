@@ -44,7 +44,8 @@ const authenticateToken = (req, res, next) => {
     next();
 };
 
-// Endpoint para crear usuario (no protegido)
+//USER
+//Crear user
 app.post('/api/user', (req, res) => {
     const { nombre, correo, password, foto } = req.body;
     const consulta = 'INSERT INTO user (nombre, correo, password, foto) VALUES (?, ?, ?, ?)';
@@ -58,7 +59,7 @@ app.post('/api/user', (req, res) => {
     });
 });
 
-// Endpoint para leer usuarios (protegido)
+//Leer user
 app.get('/api/user', authenticateToken, (req, res) => {
     const consulta = 'SELECT * FROM user';
 
@@ -71,7 +72,7 @@ app.get('/api/user', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para actualizar usuario (protegido)
+//Actualizar user
 app.put('/api/user/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
     const { nombre, correo, password, foto } = req.body;
@@ -87,7 +88,7 @@ app.put('/api/user/:id', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para eliminar usuario (protegido)
+//Eliminar user
 app.delete('/api/user/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
     const consulta = 'DELETE FROM user WHERE id = ?';
@@ -101,7 +102,8 @@ app.delete('/api/user/:id', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para agregar una nota con imágenes
+//NOTAS
+//Agregar una nota con imágenes
 app.post('/api/note', (req, res) => {
     const { userId, title, content, images } = req.body;
 
@@ -134,7 +136,7 @@ app.post('/api/note', (req, res) => {
     });
 });
 
-// Endpoint para leer notas y sus imágenes (protegido)
+//Leer notas y sus imágenes
 app.get('/api/note', authenticateToken, (req, res) => {
     const { userId } = req.query;
     const query = `
@@ -171,7 +173,7 @@ app.get('/api/note', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para leer una nota específica y sus imágenes (protegido)
+//Leer una nota específica y sus imágenes
 app.get('/api/note/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
 
@@ -211,7 +213,7 @@ app.get('/api/note/:id', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para actualizar una nota con imágenes (protegido)
+//Actualizar una nota con imágenes
 app.put('/api/note/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
     const { title, content, images } = req.body;
@@ -252,7 +254,7 @@ app.put('/api/note/:id', authenticateToken, (req, res) => {
     });
 });
 
-// Endpoint para eliminar una nota y sus imágenes (protegido)
+//Eliminar una nota y sus imágenes
 app.delete('/api/note/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
 
@@ -277,7 +279,68 @@ app.delete('/api/note/:id', authenticateToken, (req, res) => {
     });
 });
 
+//AUDIO
+//Agregar audio
+app.post('/api/audios', (req, res) => {
+    const { userId, title, audio, fecha } = req.body;
+
+    const noteQuery = 'INSERT INTO audios (userId, title, audio, fecha) VALUES (?, ?, ?, ?)';
+    db.query(noteQuery, [ userId, title, audio, fecha ], (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.status(200).send(result);
+    });
+});
+
+//Leer audio
+app.get('/api/audios', authenticateToken, (req, res) => {
+    const { userId } = req.query;
+    const query = `
+        SELECT a.id, a.title, a.audio, a.fecha
+        FROM audios a
+        WHERE a.userId = ?
+    `;
+
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+
+        const audios = {};
+
+        results.forEach(row => {
+            if (!audios[row.id]) {
+                audios[row.id] = {
+                    id: row.id,
+                    title: row.title,
+                    audio: row.audio,
+                    fecha: row.fecha
+                };
+            }
+        });
+
+        res.status(200).send(Object.values(audios));
+    });
+});
+
+//Eliminar audio
+app.delete('/api/audios/:id', authenticateToken, (req, res) => {
+    const { id } = req.params;
+    const consulta = 'DELETE FROM audios WHERE id = ?';
+
+    db.query(consulta, [id], (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.status(200).send(result);
+    });
+});
+
 app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://192.168.0.11:${port}`);
+    console.log(`Servidor ejecutándose en http://192.168.0.6:${port}`);
 });
 

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.AggNotaAudio"
              BackgroundColor="Beige">
+    
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20">
             <Label
-                Margin="0,20,0,0"
+                Margin="0,20,0,20"
                 TextColor="Black"
                 FontAttributes="Bold"
                 FontSize="Title"
@@ -15,16 +16,42 @@
                 Style="{StaticResource Headline}"
                 Text="Agregar Nota de Audio" />
 
-            <Button
-                x:Name="btnRegresar"
-                Margin="0,0,0,10"
-                Background="#00532c" TextColor="White" FontAttributes="Bold"
-                WidthRequest="200"
-                HeightRequest="50"
-                Clicked="btnRegresar_Clicked"
-                HorizontalOptions="Center"
-                SemanticProperties.Hint="Regresar a Menu Principal"
-                Text="Regresar" />
+            <ImageButton
+                x:Name="btnPlayRecord"
+                Margin="20,0,0,0"
+                HeightRequest="60"
+                WidthRequest="60"
+                Clicked="btnPlayRecord_Clicked"
+                Source="play.png"
+                HorizontalOptions="Start"/>
+
+            <ImageButton
+                x:Name="btnStopRecord"
+                Margin="20,0,0,0"
+                HeightRequest="60"
+                WidthRequest="60"
+                Clicked="btnStopRecord_Clicked"
+                Source="pausa.png"
+                HorizontalOptions="Start"/>
+
+            <Image
+                Source="micro.png"
+                HorizontalOptions="End"
+                Margin="0,-85,20,20"
+                HeightRequest="60"
+                WidthRequest="60"/>
+
+            <Entry
+                x:Name="txtTitle"
+                Placeholder="Ingrese un titulo para el audio"/>
+
+            <Button 
+                x:Name="btnSave" 
+                Text="Guardar" 
+                Background="CadetBlue"
+                Margin="40,0,40,0"
+                TextColor="White" 
+                Clicked="OnSaveClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
