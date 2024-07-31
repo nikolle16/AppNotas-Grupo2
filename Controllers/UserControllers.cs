@@ -74,8 +74,69 @@ namespace App_Notas___Grupo_2.Controllers
             return userList;
         }
 
-        // Update (Por implementar)
+        //Update
+        public static async Task<int> Update(Models.User user)
+        {
+            try
+            {
+                String jsonObject = JsonConvert.SerializeObject(user);
+                StringContent contenido = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-        // Delete (Por implementar)
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Config.Config.BearerToken);
+                    HttpResponseMessage response = await client.PutAsync($"{Config.Config.EndPointUpdate}/{user.id}", contenido);
+
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error al actualizar: {response?.ReasonPhrase}");
+                        return 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar: {ex}");
+                return -1;
+            }
+        }
+
+        //Delete
+        public async static Task<int> Delete(int id)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Config.Config.BearerToken);
+                    HttpResponseMessage response = null;
+
+                    response = await client.DeleteAsync($"{Config.Config.EndPointDelete}/{id}");
+
+                    if (response != null)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var result = response.Content.ReadAsStringAsync().Result;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Ha Ocurrido un Error: {response.ReasonPhrase}");
+                            return -1;
+                        }
+                    }
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ha Ocurrido un Error: {ex.ToString()}");
+                return -1;
+            }
+        }
     }
 }

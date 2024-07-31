@@ -5,7 +5,13 @@
              Title=""
              BackgroundColor="Beige">
 
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="menu.png"
+            Order="Primary"
+            Priority="0"
+            Clicked="OnToolbarItemClicked"/>
+    </ContentPage.ToolbarItems>
 
     <ScrollView>
         <VerticalStackLayout Padding="0,0">

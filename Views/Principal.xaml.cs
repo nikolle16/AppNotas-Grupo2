@@ -22,6 +22,29 @@ namespace App_Notas___Grupo_2.Views
             await LoadNotes();
         }
 
+        private async void OnToolbarItemClicked(object sender, EventArgs e)
+        {
+            string action = await DisplayActionSheet("Menú", "Cancel", null, "Actualizar Usuario", "Cerrar Sesión");
+            switch (action)
+            {
+                case "Actualizar Usuario":
+                    await Navigation.PushAsync(new ActuUser());
+                    break;
+                case "Cerrar Sesión":
+                    Logout();
+                    break;
+            }
+        }
+
+        private void Logout()
+        {
+            Preferences.Remove("userId");
+            Preferences.Remove("username");
+            Preferences.Remove("password");
+
+            Application.Current.MainPage = new NavigationPage(new Login());
+        }
+
         private async void OnAgregarNotaClicked(object sender, EventArgs e)
         {
             string action = await DisplayActionSheet("Agregar Nota", "Cancel", null, "Nota de Texto", "Nota de Audio");

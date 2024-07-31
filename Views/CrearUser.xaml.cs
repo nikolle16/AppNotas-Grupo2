@@ -11,8 +11,8 @@ public partial class CrearUser : ContentPage
     FileResult photo;
 
     public CrearUser()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         controller = new Controllers.UserControllers();
     }
 
@@ -25,6 +25,7 @@ public partial class CrearUser : ContentPage
         txtNombre.Text = string.Empty;
         txtCorreo.Text = string.Empty;
         txtPassword.Text = string.Empty;
+        txtConfirmPassword.Text = string.Empty; 
     }
 
     public string? GetImg64()
@@ -55,9 +56,9 @@ public partial class CrearUser : ContentPage
             using Stream sourcephoto = await photo.OpenReadAsync();
             using FileStream streamlocal = File.OpenWrite(photoPath);
 
-            imgFoto.Source = ImageSource.FromStream(() => photo.OpenReadAsync().Result); 
+            imgFoto.Source = ImageSource.FromStream(() => photo.OpenReadAsync().Result);
 
-            await sourcephoto.CopyToAsync(streamlocal); 
+            await sourcephoto.CopyToAsync(streamlocal);
         }
     }
 
@@ -88,26 +89,32 @@ public partial class CrearUser : ContentPage
         string Nombre = txtNombre.Text;
         string Correo = txtCorreo.Text;
         string Password = txtPassword.Text;
-        bool corre = await BuscarCorreo(Correo);
+        string ConfirmPassword = txtConfirmPassword.Text;
+        bool correoDisponible = await BuscarCorreo(Correo);
 
         if (string.IsNullOrEmpty(Nombre))
         {
-            await DisplayAlert("Error", "Porfavor ingrese su nombre", "OK");
+            await DisplayAlert("Error", "Por favor ingrese su nombre", "OK");
             return;
         }
         else if (string.IsNullOrEmpty(Correo))
         {
-            await DisplayAlert("Error", "Porfavor ingrese un correo", "OK");
+            await DisplayAlert("Error", "Por favor ingrese un correo", "OK");
             return;
         }
         else if (string.IsNullOrEmpty(Password))
         {
-            await DisplayAlert("Error", "Porfavor ingrese una contraseña", "OK");
+            await DisplayAlert("Error", "Por favor ingrese una contraseña", "OK");
             return;
         }
-        else if (corre == false)
+        else if (Password != ConfirmPassword)
         {
-            await DisplayAlert("Error", "El correo ingresado ya esta registrado", "OK");
+            await DisplayAlert("Error", "Las contraseñas no coinciden", "OK");
+            return;
+        }
+        else if (!correoDisponible)
+        {
+            await DisplayAlert("Error", "El correo ingresado ya está registrado", "OK");
             return;
         }
 
@@ -127,24 +134,18 @@ public partial class CrearUser : ContentPage
             {
                 if (await Controllers.UserControllers.Create(user) > 0)
                 {
-                    await DisplayAlert("Aviso", "Registro Ingresado con Exito!", "OK");
+                    await DisplayAlert("Aviso", "Registro ingresado con éxito!", "OK");
                     await Navigation.PopAsync();
                 }
                 else
                 {
-                    await DisplayAlert("Error", "Ocurrio un Error", "OK");
+                    await DisplayAlert("Error", "Ocurrió un error", "OK");
                 }
             }
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Ocurrio un Error: {ex.Message}", "OK");
+            await DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
         }
     }
-
-    private void btnRegresar_Clicked(object sender, EventArgs e)
-    {
-        Navigation.PopAsync();
-    }
-
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App_Notas___Grupo_2.Views.CrearUser"
-             BackgroundColor="Beige">
+             x:Class="App_Notas___Grupo_2.Views.ActuUser"
+             Title="">
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20">
             <Label
@@ -13,7 +13,7 @@
                 HorizontalOptions="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Crear Usuario" />
+                Text="Actualizar Usuario" />
 
             <Image
                 x:Name="imgFoto"
@@ -80,11 +80,32 @@
                 FontAttributes="Bold"
                 FontSize="Body"
                 HorizontalOptions="Start"
-                Text="Contraseña:"
+                Text="Contraseña actual:"
                 VerticalOptions="Center"/>
 
             <Entry 
-                x:Name="txtPassword"
+                x:Name="txtOldPassword"
+                Margin="15,0,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="StartAndExpand"
+                Keyboard="Text"
+                Placeholder="Ingresa tu contraseña actual"
+                VerticalOptions="Center" 
+                IsPassword="True"/>
+
+            <Label 
+                Margin="0,10,0,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="Start"
+                Text="Contraseña nueva:"
+                VerticalOptions="Center"/>
+
+            <Entry 
+                x:Name="txtNewPassword"
                 Margin="15,0,0,0"
                 TextColor="Black"
                 FontAttributes="Bold"
@@ -95,37 +116,16 @@
                 VerticalOptions="Center" 
                 IsPassword="True"/>
 
-            <Label 
-                Margin="0,10,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="Start"
-                Text="Confirmar Contraseña:"
-                VerticalOptions="Center"/>
-
-            <Entry 
-                x:Name="txtConfirmPassword"
-                Margin="15,0,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Text"
-                Placeholder="Confirma tu contraseña"
-                VerticalOptions="Center" 
-                IsPassword="True"/>
-
             <Button
-                x:Name="btnCrear"
+                x:Name="btnActu"
                 Margin="0,20,0,0"
                 Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
                 WidthRequest="150"
                 HeightRequest="50"
                 Clicked="btnCrear_Clicked"
                 HorizontalOptions="Center"
-                SemanticProperties.Hint="Crear"
-                Text="Crear"/>
+                SemanticProperties.Hint="Actualizar"
+                Text="Actualizar"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
