@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.AggNota"
-             Title="AGREGAR NOTA"
+             Title="Agregar Nota"
              BackgroundColor="White">
     
     <StackLayout Padding="10">
@@ -11,14 +11,16 @@
             Placeholder="Titulo"
             FontAttributes="Bold"
             WidthRequest="350"
-            FontSize="18"/>
+            FontSize="18"
+            TextColor="Black"/>
         
         <Editor 
             x:Name="contentEditor" 
             Margin="10,30,10,20"
             FontSize="14"
             Placeholder="Contenido" 
-            HeightRequest="200" />
+            HeightRequest="200"
+            TextColor="Black"/>
         <Button 
             Text="Seleccionar Imagenes" 
             WidthRequest="250"

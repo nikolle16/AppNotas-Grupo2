@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Microsoft.Maui.Controls;
 using App_Notas___Grupo_2.Models;
 using Plugin.Maui.Audio;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
 
 namespace App_Notas___Grupo_2.Views
 {
@@ -158,7 +159,7 @@ namespace App_Notas___Grupo_2.Views
 
         private async void OnEliminarAudioClicked(object sender, EventArgs e)
         {
-            if (sender is Button button && button.CommandParameter is Audio audio)
+            if (sender is ImageButton button && button.CommandParameter is Audio audio)
             {
                 bool isConfirmed = await DisplayAlert("Confirmar", $"¿Desea eliminar el audio '{audio.title}'?", "Sí", "No");
                 if (isConfirmed)
@@ -205,9 +206,43 @@ namespace App_Notas___Grupo_2.Views
                 return false;
             }
         }
+
+        private async void OnCompartirNotaClicked(object sender, EventArgs e)
+        {
+            if (sender is ImageButton button && button.CommandParameter is Note note)
+            {
+                var shareTextRequest = new ShareTextRequest
+                {
+                    Title = note.Title,
+                    Text = $"{note.Title}\n\n{note.Content}"
+                };
+
+                await Share.RequestAsync(shareTextRequest);
+            }
+        }
+
+        private async void OnCompartirAudioClicked(object sender, EventArgs e)
+        {
+            if (sender is ImageButton button && button.CommandParameter is Audio audio)
+            {
+                var filePath = audio.audio;
+                System.Diagnostics.Debug.WriteLine($"Ruta del archivo de audio: {filePath}");
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    var file = new ShareFile(filePath);
+                    await Share.RequestAsync(new ShareFileRequest
+                    {
+                        Title = audio.title,
+                        File = file
+                    });
+                }
+                else
+                {
+                    await DisplayAlert("Error", $"El archivo de audio no se encuentra en la ruta: {filePath}", "OK");
+                }
+            }
+        }
+
     }
 }
-
-
-
-

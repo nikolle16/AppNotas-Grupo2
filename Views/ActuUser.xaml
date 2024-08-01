@@ -2,19 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.ActuUser"
-             Title="">
+             Title="Actualizar Usuario"
+             BackgroundColor="White">
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20">
-            <Label
-                Margin="0,20,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Title"
-                HorizontalOptions="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Actualizar Usuario" />
-
             <Image
                 x:Name="imgFoto"
                 Margin="0,0,0,0"
