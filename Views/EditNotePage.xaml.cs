@@ -72,7 +72,7 @@ namespace App_Notas___Grupo_2.Views
                 var base64Images = imageBytesList.ConvertAll(image => Convert.ToBase64String(image));
                 await UpdateNoteAsync(noteId, title, content, base64Images, userId);
                 await DisplayAlert("Éxito", "Nota actualizada exitosamente", "OK");
-                await Navigation.PopAsync();
+                await Navigation.PushAsync(new Principal());
             }
             else
             {

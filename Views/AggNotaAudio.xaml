@@ -2,19 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.AggNotaAudio"
-             BackgroundColor="Beige">
+             BackgroundColor="White"
+             Title="NOTA DE AUDIO">
     
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20">
             <Label
-                Margin="0,20,0,20"
+                Margin="0,30,0,20"
                 TextColor="Black"
                 FontAttributes="Bold"
                 FontSize="Title"
                 HorizontalOptions="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Agregar Nota de Audio" />
+                Text="Grabadora de Audio" />
 
             <ImageButton
                 x:Name="btnPlayRecord"
@@ -43,12 +44,16 @@
 
             <Entry
                 x:Name="txtTitle"
+                FontAttributes="Bold"
+                TextColor="Black"
                 Placeholder="Ingrese un titulo para el audio"/>
 
             <Button 
                 x:Name="btnSave" 
                 Text="Guardar" 
-                Background="CadetBlue"
+                Background="Green"
+                FontAttributes="Bold"
+                FontSize="16"
                 Margin="40,0,40,0"
                 TextColor="White" 
                 Clicked="OnSaveClicked"/>

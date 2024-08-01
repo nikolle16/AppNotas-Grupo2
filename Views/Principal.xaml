@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.Principal"
              Title=""
-             BackgroundColor="Beige">
+             BackgroundColor="White">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 
@@ -13,93 +13,146 @@
             Clicked="OnToolbarItemClicked"/>
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
-        <VerticalStackLayout>
-            <Frame
-                Grid.Column="1"
-                Margin="20,30,20,0"
-                BorderColor="Black"
-                BackgroundColor="Transparent"
-                CornerRadius="50"
-                Padding="1">
-                <SearchBar
-                x:Name="searchBar"
-                    Margin="0,0,0,0"
-                    TextColor="Black"
-                    FontAttributes="Bold"
-                    Background="Transparent"
-                    Placeholder="Buscar Lugares"
-                    PlaceholderColor="Black"
-                    />
-                <!-- SearchButtonPressed="searchBar_SearchButtonPressed" -->
-                <!-- TextChanged="searchBar_TextChanged" -->
-            </Frame>
+    <AbsoluteLayout>
+        <ScrollView
+            Padding="20"
+            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+            AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout>
+                <Label Text="Notas de Texto e Imagenes"
+                       Margin="0,0,0,10"
+                       FontSize="18"
+                       FontAttributes="Bold"/>
 
-            <Label
-                Text="Notas de texto e imagenes"/>
+                <Frame>
+                    <ListView 
+                        x:Name="NotasListView"
+                        HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Text="{Binding Title}" 
+                                            FontAttributes="Bold" 
+                                            FontSize="16" 
+                                            TextColor="Black" 
+                                            Grid.Row="0" 
+                                            Grid.Column="0"
+                                            Margin="0,5,0,0"/>
+                                        <Label 
+                                            Text="{Binding Content}" 
+                                            LineBreakMode="WordWrap" 
+                                            Margin="0,10,0,0" 
+                                            MaxLines="5" 
+                                            FontSize="14" TextColor="Black" 
+                                            Grid.Row="1" 
+                                            Grid.Column="0"/>
+                                        <Label 
+                                            Text="{Binding CreatedAt}" 
+                                            FontSize="12" 
+                                            TextColor="Gray" 
+                                            FontAttributes="Italic"
+                                            Margin="0,10,0,10" 
+                                            Grid.Row="2" 
+                                            Grid.Column="0"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
 
-            <ListView x:Name="NotasListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout 
-                                HeightRequest="60">
-                                <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Content}" LineBreakMode="WordWrap" MaxLines="2"/>
-                                <Label Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Micro"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <Label  
+                    Text="Notas de audio"
+                    Margin="0,20,0,10"
+                    FontSize="18"
+                    FontAttributes="Bold"/>
 
-            <Label
-                Text="Notas de audio"/>
+                <Frame>
+                    <ListView 
+                        x:Name="AudioListView"
+                        HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Text="{Binding title}" 
+                                            FontAttributes="Bold" 
+                                            FontSize="16" 
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            LineBreakMode="WordWrap"
+                                            Margin="0,5,0,0"/>
+                                        <Label 
+                                            Text="{Binding audio}" 
+                                            FontAttributes="Italic" 
+                                            Margin="0,10,0,0" 
+                                            FontSize="14" 
+                                            TextColor="Black" 
+                                            Grid.Row="1" 
+                                            Grid.Column="0"/>
+                                        <Label 
+                                            Text="{Binding fecha}" 
+                                            FontSize="12" 
+                                            Margin="0,10,0,0" 
+                                            TextColor="Gray" 
+                                            Grid.Row="2" 
+                                            Grid.Column="0"/>
+                                        <Button 
+                                            Text="Eliminar" 
+                                            Margin="0,15,10,10" 
+                                            Clicked="OnEliminarAudioClicked" 
+                                            CommandParameter="{Binding .}" 
+                                            Grid.Row="3" 
+                                            Grid.Column="0" 
+                                            VerticalOptions="Start" 
+                                            HorizontalOptions="End"
+                                            BackgroundColor="Red" 
+                                            TextColor="White" 
+                                            CornerRadius="25" 
+                                            Padding="5,0" 
+                                            WidthRequest="100" 
+                                            HeightRequest="30"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
 
-            <ListView x:Name="AudioListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding title}" FontAttributes="Bold" />
-                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding audio}" FontAttributes="Italic" FontSize="Small" />
-                                <Label Grid.Row="2" Grid.Column="0" Text="{Binding fecha}" FontSize="Small" />
-                                <Button Grid.Row="3" Grid.Column="1" Text="Eliminar" Clicked="OnEliminarAudioClicked" CommandParameter="{Binding .}" VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Frame
-                Margin="0,500,20,0"
-                WidthRequest="75"
-                HeightRequest="75"
-                CornerRadius="50"
-                BackgroundColor="Transparent"
-                BorderColor="Black"
-                HorizontalOptions="End">
-                <Button
-                    Text="+"
-                    TextColor="Beige"
-                    FontAttributes="Bold"
-                    FontSize="50"
-                    BackgroundColor="#2b0098"
-                    WidthRequest="100"
-                    HeightRequest="100"
-                    CornerRadius="50"
-                    Clicked="OnAgregarNotaClicked"/>
-            </Frame>
-        </VerticalStackLayout>
-    </ScrollView>
+        <Button
+            AbsoluteLayout.LayoutBounds="1,1,75,75"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            Text="+"
+            FontSize="30"
+            FontAttributes="Bold"
+            TextColor="White"
+            Margin="20"
+            WidthRequest="60"
+            HeightRequest="60"
+            BackgroundColor="#2b0098"
+            CornerRadius="30"
+            Clicked="OnAgregarNotaClicked"/>
+    </AbsoluteLayout>
 </ContentPage>

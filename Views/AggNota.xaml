@@ -2,16 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.AggNota"
-             Title="Agregar nota"
-             BackgroundColor="Beige">
+             Title="AGREGAR NOTA"
+             BackgroundColor="White">
     
     <StackLayout Padding="10">
-        <Entry x:Name="titleEntry" Placeholder="Título" />
-        <Editor x:Name="contentEditor" Placeholder="Contenido" HeightRequest="200" />
-        <Button Text="Seleccionar Imágenes" Clicked="OnSelectImagesButtonClicked" />
+        <Entry 
+            x:Name="titleEntry" 
+            Placeholder="Titulo"
+            FontAttributes="Bold"
+            WidthRequest="350"
+            FontSize="18"/>
+        
+        <Editor 
+            x:Name="contentEditor" 
+            Margin="10,30,10,20"
+            FontSize="14"
+            Placeholder="Contenido" 
+            HeightRequest="200" />
+        <Button 
+            Text="Seleccionar Imagenes" 
+            WidthRequest="250"
+            HeightRequest="50"
+            FontAttributes="Bold"
+            FontSize="16"
+            Clicked="OnSelectImagesButtonClicked" />
         <ScrollView HeightRequest="200">
             <StackLayout x:Name="imagesStackLayout" />
         </ScrollView>
-        <Button Text="Guardar Nota" Clicked="OnSaveNoteButtonClicked" />
+        <Button 
+            Text="Guardar Nota" 
+            WidthRequest="250"
+            HeightRequest="50"
+            FontAttributes="Bold"
+            FontSize="16"
+            Background="Green"
+            Clicked="OnSaveNoteButtonClicked" />
     </StackLayout>
 </ContentPage>

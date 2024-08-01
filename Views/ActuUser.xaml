@@ -27,7 +27,7 @@
 
             <ImageButton
                 x:Name="btnfoto"
-                Margin="0,-40,0,0"
+                Margin="0,-40,0,-20"
                 WidthRequest="200"
                 HeightRequest="50"
                 Source="aggfoto.png"
@@ -45,9 +45,9 @@
 
             <Entry
                 x:Name="txtNombre"
-                Margin="15,0,0,0"
+                Margin="0,0,0,0"
+                WidthRequest="300"
                 TextColor="Black"
-                FontAttributes="Bold"
                 FontSize="Body"
                 HorizontalOptions="StartAndExpand"
                 Keyboard="Text"
@@ -65,9 +65,9 @@
 
             <Entry
                 x:Name="txtCorreo"
-                Margin="15,0,0,0"
+                Margin="0,0,0,0"
+                WidthRequest="300"
                 TextColor="Black"
-                FontAttributes="Bold"
                 FontSize="Body"
                 HorizontalOptions="StartAndExpand"
                 Keyboard="Text"
@@ -85,9 +85,9 @@
 
             <Entry 
                 x:Name="txtOldPassword"
-                Margin="15,0,0,0"
+                Margin="0,0,0,0"
                 TextColor="Black"
-                FontAttributes="Bold"
+                WidthRequest="300"
                 FontSize="Body"
                 HorizontalOptions="StartAndExpand"
                 Keyboard="Text"
@@ -106,9 +106,9 @@
 
             <Entry 
                 x:Name="txtNewPassword"
-                Margin="15,0,0,0"
+                Margin="0,0,0,0"
                 TextColor="Black"
-                FontAttributes="Bold"
+                WidthRequest="300"
                 FontSize="Body"
                 HorizontalOptions="StartAndExpand"
                 Keyboard="Text"
@@ -118,8 +118,8 @@
 
             <Button
                 x:Name="btnActu"
-                Margin="0,20,0,0"
-                Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
+                Margin="0,20,0,20"
+                Background="#2b0098" TextColor="White" FontAttributes="Bold"
                 WidthRequest="150"
                 HeightRequest="50"
                 Clicked="btnCrear_Clicked"
