@@ -105,4 +105,9 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+		<MauiFont Include="Resources/Fonts/Nunito-Regular.ttf" Alias="NunitoRegular" />
+		<MauiFont Include="Resources/Fonts/Nunito-Bold.ttf" Alias="NunitoBold" />
+	</ItemGroup>
+
 </Project>

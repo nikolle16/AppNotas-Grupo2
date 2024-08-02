@@ -2,130 +2,159 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.CrearUser"
+             Title="           Crear Usuario"
              BackgroundColor="White">
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="20">
-            <Label
-                Margin="0,20,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Title"
-                HorizontalOptions="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Crear Usuario" />
 
-            <Image
-                x:Name="imgFoto"
-                Margin="0,0,0,0"
-                Aspect="AspectFit"
-                HeightRequest="150"
-                HorizontalOptions="CenterAndExpand"
-                Source="avatar.png"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="150" />
+    <AbsoluteLayout>
+        <Image
+    Margin="0,-5,0,25"
+    Aspect="Fill"
+    HeightRequest="1000"
+    WidthRequest="400" 
+    Source="bg.jpg"
+    HorizontalOptions="CenterAndExpand"
+    VerticalOptions="CenterAndExpand"/>
 
-            <ImageButton
-                x:Name="btnfoto"
-                Margin="0,-40,0,0"
-                WidthRequest="200"
-                HeightRequest="50"
-                Source="aggfoto.png"
-                HorizontalOptions="End"
-                Clicked="btnfoto_Clicked"/>
+        <ScrollView
+            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+            AbsoluteLayout.LayoutFlags="All">
+            
+            <VerticalStackLayout Padding="30,0" Spacing="20">
 
-            <Label
-                Margin="0,10,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="Start"
-                Text="Nombre:"
-                VerticalOptions="Center" />
+                <Image
+            x:Name="imgFoto"
+            Margin="0,30,0,0"
+            Aspect="AspectFit"
+            HeightRequest="150"
+            HorizontalOptions="CenterAndExpand"
+            Source="avatar.png"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="150" />
 
-            <Entry
-                x:Name="txtNombre"
-                Margin="15,0,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Text"
-                Placeholder="Nombre y Apellido"
-                VerticalOptions="Center" />
+                <ImageButton
+            x:Name="btnfoto"
+            Margin="0,-40,0,0"
+            WidthRequest="200"
+            HeightRequest="50"
+            Source="aggfoto.png"
+            HorizontalOptions="End"
+            Clicked="btnfoto_Clicked"/>
 
-            <Label
-                Margin="0,10,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="Start"
-                Text="Correo:"
-                VerticalOptions="Center" />
+                <Frame
+                    BackgroundColor="#40808080" 
+                    BorderColor="Black" 
+                    CornerRadius="10" 
+                    Padding="10" 
+                    Margin="0,0,0,0">
 
-            <Entry
-                x:Name="txtCorreo"
-                Margin="15,0,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Text"
-                Placeholder="user@gmail.com"
-                VerticalOptions="Center" />
+                    <StackLayout>
+                        <Label
+                            Margin="0,20,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Nombre:"
+                            VerticalOptions="Center" />
 
-            <Label 
-                Margin="0,10,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="Start"
-                Text="Contraseña:"
-                VerticalOptions="Center"/>
+                        <Entry
+                            x:Name="txtNombre"
+                            Margin="0,0,0,0"
+                            TextColor="Black"
+                            FontSize="Body"
+                            HorizontalOptions="StartAndExpand"
+                            Keyboard="Text"
+                            Placeholder="Nombre y Apellido"
+                            PlaceholderColor="Gray"
+                            FontFamily="Nunito-Regular"
+                            WidthRequest="300"
+                            VerticalOptions="Center" />
 
-            <Entry 
-                x:Name="txtPassword"
-                Margin="15,0,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Text"
-                Placeholder="Ingresa una contraseña"
-                VerticalOptions="Center" 
-                IsPassword="True"/>
+                        <Label
+                            Margin="0,20,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Correo:"
+                            VerticalOptions="Center" />
 
-            <Label 
-                Margin="0,10,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="Start"
-                Text="Confirmar Contraseña:"
-                VerticalOptions="Center"/>
+                        <Entry
+                            x:Name="txtCorreo"
+                            Margin="0,0,0,0"
+                            WidthRequest="300"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="Body"
+                            HorizontalOptions="StartAndExpand"
+                            Keyboard="Text"
+                            Placeholder="user@gmail.com"
+                            PlaceholderColor="Gray"
+                            VerticalOptions="Center" />
 
-            <Entry 
-                x:Name="txtConfirmPassword"
-                Margin="15,0,0,0"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Body"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Text"
-                Placeholder="Confirma tu contraseña"
-                VerticalOptions="Center" 
-                IsPassword="True"/>
+                        <Label 
+                            Margin="0,20,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Contraseña:"
+                            VerticalOptions="Center"/>
 
-            <Button
-                x:Name="btnCrear"
-                Margin="0,20,0,0"
-                Background="CornflowerBlue" TextColor="White" FontAttributes="Bold"
-                WidthRequest="150"
-                HeightRequest="50"
-                Clicked="btnCrear_Clicked"
-                HorizontalOptions="Center"
-                SemanticProperties.Hint="Crear"
-                Text="Crear"/>
-        </VerticalStackLayout>
-    </ScrollView>
+                        <Entry 
+                            x:Name="txtPassword"
+                            Margin="0,0,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="Body"
+                            HorizontalOptions="StartAndExpand"
+                            Keyboard="Text"
+                            Placeholder="Ingresa una contraseña"
+                            PlaceholderColor="Gray"
+                            WidthRequest="300"
+                            VerticalOptions="Center" 
+                            IsPassword="True"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="Body"
+                            HorizontalOptions="Start"
+                            Text="Confirmar Contraseña:"
+                            VerticalOptions="Center"/>
+
+                        <Entry 
+                            x:Name="txtConfirmPassword"
+                            Margin="0,0,0,0"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            WidthRequest="300"
+                            FontSize="Body"
+                            HorizontalOptions="StartAndExpand"
+                            Keyboard="Text"
+                            Placeholder="Confirma tu contraseña"
+                            PlaceholderColor="Gray"
+                            VerticalOptions="Center" 
+                            IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+
+                <Button
+                    x:Name="btnCrear"
+                    Margin="0,20,0,0"
+                    Background="#148ba2" 
+                    TextColor="White" 
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    Clicked="btnCrear_Clicked"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Crear"
+                    Text="Crear"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>

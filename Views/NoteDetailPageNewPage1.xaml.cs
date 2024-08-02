@@ -20,6 +20,12 @@ namespace App_Notas___Grupo_2.Views
             this.noteId = noteId;
             LoadNoteDetails(noteId);
         }
+        protected override async void OnAppearing()
+        {
+            NavigationPage.SetHasBackButton(this, false);
+
+            base.OnAppearing();
+        }
 
         private async void LoadNoteDetails(int noteId)
         {
@@ -78,6 +84,12 @@ namespace App_Notas___Grupo_2.Views
                     await DisplayAlert("Error", "Hubo un problema al eliminar la nota", "OK");
                 }
             }
+        }
+
+        private async void ButtonBack(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Principal());
+
         }
 
         private async Task<bool> DeleteNoteAsync(int noteId)

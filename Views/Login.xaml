@@ -2,18 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.Login"
-             BackgroundColor="White">
-    <ScrollView>
+             BackgroundColor="#fcf2e9"
+             NavigationPage.HasNavigationBar="False">
 
+    <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20">
             <Image
-                Margin="0,-20,0,0"
+                Margin="0,20,0,0"
                 Aspect="AspectFit"
                 HeightRequest="200"
-                WidthRequest="200" 
-                Source="logouth.png"
+                WidthRequest="300" 
+                Source="logo2.jpg"
                 HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"/>
+                VerticalOptions="CenterAndExpand" />
+
+            <Label
+                Margin="0,0,0,0"
+                Text="EcoWrite"
+                HorizontalOptions="Center"
+                FontSize="32"
+                TextColor="Black"
+                FontFamily="Nunito-Bold"/>
 
             <Label
                 Margin="0,0,0,0"
@@ -31,6 +40,7 @@
                 FontAttributes="Bold"
                 FontSize="Body"
                 HorizontalOptions="Start"
+                FontFamily="Nunito-Regular"
                 Keyboard="Text"
                 Placeholder="correo@gmail.com"
                 WidthRequest="300"
@@ -52,6 +62,7 @@
                 FontAttributes="Bold"
                 FontSize="Body"
                 HorizontalOptions="Start"
+                FontFamily="Nunito-Regular"
                 Keyboard="Text"
                 Placeholder="Ingresa una contraseña"
                 WidthRequest="300"
@@ -61,10 +72,13 @@
             <Button
                 x:Name="btnIniSesion"
                 Margin="0,30,0,0"
-                Background="#2b0098" TextColor="White" FontAttributes="Bold"
+                Background="#148ba2" 
+                TextColor="#fcf2e9" 
+                FontAttributes="Bold"
                 WidthRequest="200"
                 HeightRequest="50"
-                FontSize="18"
+                CornerRadius="25"
+                FontSize="20"
                 Clicked="btnIniSesion_Clicked"
                 HorizontalOptions="Center"
                 SemanticProperties.Hint="Inicia Sesion"
@@ -75,6 +89,7 @@
                 TextColor="Gray" FontAttributes="Bold"
                 HorizontalOptions="Center"
                 FontSize="16"
+                FontFamily="Nunito-Regular"
                 Margin="10,20,0,0">
             </Label>
 
@@ -83,6 +98,7 @@
                 TextColor="Gray" FontAttributes="Bold"
                 HorizontalOptions="Center"
                 FontSize="16"
+                FontFamily="Nunito-Regular"
                 Margin="10,-10,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />

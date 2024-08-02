@@ -4,59 +4,90 @@
              x:Class="App_Notas___Grupo_2.Views.AggNotaAudio"
              BackgroundColor="White"
              Title="Nota de Audio">
-    
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="20">
-            <Label
-                Margin="0,10,0,20"
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="Title"
-                HorizontalOptions="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Grabadora de Audio" />
 
-            <ImageButton
-                x:Name="btnPlayRecord"
-                Margin="20,0,0,0"
-                HeightRequest="60"
-                WidthRequest="60"
-                Clicked="btnPlayRecord_Clicked"
-                Source="play.png"
-                HorizontalOptions="Start"/>
+    <AbsoluteLayout>
+        
+        <Image
+            Margin="0,-5,0,25"
+            Aspect="Fill"
+            HeightRequest="1000"
+            WidthRequest="400" 
+            Source="bg.jpg"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
+        
+        <ScrollView
+            Padding="20"
+            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+            AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout Padding="30,0" Spacing="20">
 
-            <ImageButton
-                x:Name="btnStopRecord"
-                Margin="20,0,0,0"
-                HeightRequest="60"
-                WidthRequest="60"
-                Clicked="btnStopRecord_Clicked"
-                Source="pausa.png"
-                HorizontalOptions="Start"/>
+                <Frame
+                    BackgroundColor="#40808080"
+                    Margin="0,0,0,0"
+                    WidthRequest="350"
+                    CornerRadius="25">
+                    <StackLayout>
+                        <Label
+                            Margin="0,10,0,30"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="Title"
+                            FontFamily="Nunito-Bold"
+                            HorizontalOptions="Center"
+                            SemanticProperties.HeadingLevel="Level1"
+                            Style="{StaticResource Headline}"
+                            Text="Grabadora de Audio" />
 
-            <Image
-                Source="micro.png"
-                HorizontalOptions="End"
-                Margin="0,-85,20,20"
-                HeightRequest="60"
-                WidthRequest="60"/>
+                        <ImageButton
+                            x:Name="btnPlayRecord"
+                            Margin="20,0,0,0"
+                            HeightRequest="60"
+                            WidthRequest="60"
+                            Clicked="btnPlayRecord_Clicked"
+                            Source="play.png"
+                            HorizontalOptions="Start"/>
 
-            <Entry
-                x:Name="txtTitle"
-                FontAttributes="Bold"
-                TextColor="Black"
-                Placeholder="Ingrese un titulo para el audio"/>
+                        <ImageButton
+                            x:Name="btnStopRecord"
+                            Margin="20,0,0,0"
+                            HeightRequest="60"
+                            WidthRequest="60"
+                            Clicked="btnStopRecord_Clicked"
+                            Source="pausa.png"
+                            HorizontalOptions="Start"/>
 
-            <Button 
-                x:Name="btnSave" 
-                Text="Guardar" 
-                Background="Green"
-                FontAttributes="Bold"
-                FontSize="16"
-                Margin="40,0,40,0"
-                TextColor="White" 
-                Clicked="OnSaveClicked"/>
-        </VerticalStackLayout>
-    </ScrollView>
+                        <Image
+                            Source="micro.png"
+                            HorizontalOptions="End"
+                            Margin="0,-65,20,20"
+                            HeightRequest="60"
+                            WidthRequest="60"/>
+
+                        <Entry
+                            x:Name="txtTitle"
+                            Margin="0,10,0,0"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            FontSize="16"
+                            FontFamily="Nunito-Regular"
+                            PlaceholderColor="Gray"
+                            Placeholder="Ingrese un titulo para el audio"/>
+                    </StackLayout>
+                </Frame>
+
+                <Button 
+                    x:Name="btnSave" 
+                    Text="Guardar" 
+                    CornerRadius="25"
+                    Background="#148ba2"
+                    FontFamily="Nunito-Regular"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Margin="40,0,40,0"
+                    TextColor="White" 
+                    Clicked="OnSaveClicked"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>

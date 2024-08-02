@@ -2,19 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.NoteDetailPageNewPage1"
-             Title="Detalles de la Nota"
+             Title="                  Detalles de la Nota"
              BackgroundColor="White">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10">
-            <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Label x:Name="ContentLabel" FontSize="18" Margin="0,10,0,0"/>
-            <StackLayout x:Name="ImagesStackLayout" Margin="0,10,0,0">
-                <!-- Aquí se agregarán las imágenes dinámicamente -->
-            </StackLayout>
-            <Button Text="Eliminar Nota" Clicked="OnDeleteNoteButtonClicked" BackgroundColor="Red" TextColor="White"/>
-            <Button Text="Editar Nota" Clicked="ButtonEditNote"/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <AbsoluteLayout>
+        <Image
+            Margin="0,-5,0,25"
+            Aspect="Fill"
+            HeightRequest="1000"
+            WidthRequest="400" 
+            Source="bg.jpg"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
+        <ScrollView
+            Padding="20"
+            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+            AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout Padding="10">
+                <Label 
+                    x:Name="TitleLabel"
+                    FontSize="24" 
+                    FontFamily="Nunito-Bold"
+                    FontAttributes="Bold" 
+                    Margin="0,10,0,0"/>
+                
+                <Label
+                    x:Name="ContentLabel" 
+                    FontFamily="Nunito-Regular"
+                    FontSize="18" 
+                    Margin="0,10,0,0"/>
+                
+                <StackLayout 
+                    x:Name="ImagesStackLayout"
+                    Margin="0,50,0,0">
+                    <!-- Aquí se agregarán las imágenes dinámicamente -->
+                </StackLayout>
+
+                <Button 
+                    Margin="0,50,0,0"
+                    Text="Volver" 
+                    CornerRadius="50"
+                    WidthRequest="300"
+                    FontAttributes="Bold"
+                    FontFamily="Nunito-Bold"
+                    HeightRequest="50"
+                    BackgroundColor="#148ba2"
+                    FontSize="20"
+                    Clicked="ButtonBack"/>                
+                
+                <Button 
+                    Margin="0,20,0,0"
+                    Text="Editar Nota" 
+                    CornerRadius="50"
+                    WidthRequest="300"
+                    FontAttributes="Bold"
+                    FontFamily="Nunito-Bold"
+                    HeightRequest="50"
+                    BackgroundColor="#148ba2"
+                    FontSize="20"
+                    Clicked="ButtonEditNote"/>
+
+                <Button 
+                    Margin="0,20,0,0"
+                    FontFamily="Nunito-Bold"
+                    FontSize="20"
+                    Text="Eliminar Nota" 
+                    FontAttributes="Bold"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    CornerRadius="50"
+                    Clicked="OnDeleteNoteButtonClicked" 
+                    BackgroundColor="Red" 
+                    TextColor="White"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>
 

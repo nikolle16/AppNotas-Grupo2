@@ -21,6 +21,8 @@ namespace App_Notas___Grupo_2.Views
 
         protected override async void OnAppearing()
         {
+            NavigationPage.SetHasBackButton(this, false);
+
             base.OnAppearing();
             await LoadNotes();
             await LoadAudioFiles();
@@ -47,6 +49,11 @@ namespace App_Notas___Grupo_2.Views
             Preferences.Remove("password");
 
             Application.Current.MainPage = new NavigationPage(new Login());
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
 
         private async void OnAgregarNotaClicked(object sender, EventArgs e)

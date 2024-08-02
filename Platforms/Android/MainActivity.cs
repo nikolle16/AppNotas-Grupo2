@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Essentials;
@@ -18,6 +19,12 @@ namespace App_Notas___Grupo_2
 
             // Inicializa Xamarin.Essentials
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            // Configurar el color de la barra de estado
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+            {
+                Window.DecorView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
+            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

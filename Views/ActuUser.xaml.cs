@@ -118,7 +118,7 @@ public partial class ActuUser : ContentPage
                     if (await Controllers.UserControllers.Update(updatedUser) > 0)
                     {
                         await DisplayAlert("Aviso", "Registro Actualizado con Éxito!", "OK");
-                        await Navigation.PopAsync();
+                        await Navigation.PushAsync(new Principal());
                     }
                     else
                     {

@@ -2,42 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.AggNota"
-             Title="Agregar Nota"
-             BackgroundColor="White">
-    
-    <StackLayout Padding="10">
-        <Entry 
-            x:Name="titleEntry" 
-            Placeholder="Titulo"
-            FontAttributes="Bold"
-            WidthRequest="350"
-            FontSize="18"
-            TextColor="Black"/>
+             Title="            Agregar Nota"
+             BackgroundColor="#fcf2e9">
+
+    <AbsoluteLayout>
+        <Image
+            Margin="0,-5,0,25"
+            Aspect="Fill"
+            HeightRequest="1000"
+            WidthRequest="400" 
+            Source="bg.jpg"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
         
-        <Editor 
-            x:Name="contentEditor" 
-            Margin="10,30,10,20"
-            FontSize="14"
-            Placeholder="Contenido" 
-            HeightRequest="200"
-            TextColor="Black"/>
-        <Button 
-            Text="Seleccionar Imagenes" 
-            WidthRequest="250"
-            HeightRequest="50"
-            FontAttributes="Bold"
-            FontSize="16"
-            Clicked="OnSelectImagesButtonClicked" />
-        <ScrollView HeightRequest="200">
-            <StackLayout x:Name="imagesStackLayout" />
-        </ScrollView>
-        <Button 
-            Text="Guardar Nota" 
-            WidthRequest="250"
-            HeightRequest="50"
-            FontAttributes="Bold"
-            FontSize="16"
-            Background="Green"
-            Clicked="OnSaveNoteButtonClicked" />
-    </StackLayout>
+        <StackLayout Padding="10">
+            <Entry
+                x:Name="titleEntry" 
+                FontFamily="Nunito-Regular"
+                Margin="0,20,0,0"
+                Placeholder="Titulo"
+                PlaceholderColor="Gray"
+                FontAttributes="Bold"
+                WidthRequest="350"
+                HorizontalOptions="Center"
+                FontSize="18"
+                TextColor="Black"/>
+
+            <Editor 
+                x:Name="contentEditor" 
+                Margin="10,30,10,20"
+                FontSize="16"
+                Placeholder="Contenido"
+                FontFamily="Nunito-Regular"
+                PlaceholderColor="Gray"
+                HeightRequest="200"
+                TextColor="Black"/>
+            <Button 
+                BackgroundColor="#40808080"
+                Margin="20,0,0,0"
+                CornerRadius="25"
+                Text="Seleccionar Imagenes" 
+                FontFamily="Nunito-Regular"
+                WidthRequest="250"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                TextColor="Black"
+                FontSize="18"
+                Clicked="OnSelectImagesButtonClicked" />
+            
+            <ScrollView HeightRequest="200">
+                <StackLayout x:Name="imagesStackLayout" />
+            </ScrollView>
+            <Button 
+                Text="Guardar Nota" 
+                WidthRequest="250"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                FontFamily="Nunito-Regular"
+                FontSize="20"
+                CornerRadius="50"
+                Background="#148ba2"
+                Margin="20,0,0,0"
+                Clicked="OnSaveNoteButtonClicked" />
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
