@@ -137,4 +137,33 @@ public partial class ActuUser : ContentPage
         }
     }
 
+    private async void btnEliminarCuenta_Clicked(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Confirmar", "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.", "Sí", "No");
+
+        if (confirm)
+        {
+            if (currentUser != null)
+            {
+                int result = await Controllers.UserControllers.Delete(currentUser.id);
+
+                if (result > 0)
+                {
+                    await DisplayAlert("Aviso", "Cuenta eliminada con éxito.", "OK");
+
+                    // Limpiar las preferencias y navegar a la pantalla de inicio de sesión
+                    Preferences.Clear();
+                    await Navigation.PopToRootAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Ocurrió un error al intentar eliminar la cuenta.", "OK");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "No se pudo encontrar la cuenta actual.", "OK");
+            }
+        }
+    }
 }

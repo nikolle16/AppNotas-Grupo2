@@ -12,11 +12,13 @@ namespace App_Notas___Grupo_2.Views
 {
     public partial class Principal : ContentPage
     {
+        private List<Audio> audios;
         public Principal()
         {
             InitializeComponent();
+
             LoadNotes();
-            LoadAudioFiles(); 
+            LoadAudioFiles();
         }
 
         protected override async void OnAppearing()
@@ -26,6 +28,30 @@ namespace App_Notas___Grupo_2.Views
             base.OnAppearing();
             await LoadNotes();
             await LoadAudioFiles();
+
+            var userId = Preferences.Get("userId", null);
+            if (userId == null)
+            {
+                await DisplayAlert("Error", "No se pudo obtener el ID del usuario", "OK");
+                return;
+            }
+
+            var audios = await GetAudiosAsync(userId);
+            var audiosOrdenados = audios.OrderByDescending(a => a.fecha).ToList();
+            AudioListView.ItemsSource = audiosOrdenados;
+
+            audios = await GetAudiosAsync(userId);
+            AudioListView.ItemsSource = audios;
+
+            if (audios == null || !audios.Any())
+            {
+                EmptyMessageLabel.IsVisible = true;
+            }
+            else
+            {
+                EmptyMessageLabel.IsVisible = false;
+                AudioListView.ItemsSource = audios;
+            }
         }
 
         private async void OnToolbarItemClicked(object sender, EventArgs e)
@@ -101,6 +127,7 @@ namespace App_Notas___Grupo_2.Views
                 };
             }
         }
+
 
         private async Task<List<Note>> GetNotesAsync(string userId)
         {
@@ -249,6 +276,20 @@ namespace App_Notas___Grupo_2.Views
                     await DisplayAlert("Error", $"El archivo de audio no se encuentra en la ruta: {filePath}", "OK");
                 }
             }
+        }
+
+        private void searchBar_SearchButtonPressed(object sender, EventArgs e)
+        {
+            BuscarAudio(searchBar.Text);
+        }
+
+        private void BuscarAudio(string query)
+        {
+            var results = audios
+                .Where(audio => audio.title?.ToLowerInvariant().Contains(query.ToLowerInvariant()) == true)
+                .ToList();
+
+            AudioListView.ItemsSource = results;
         }
 
     }

@@ -160,6 +160,14 @@
                     HorizontalOptions="Center"
                     SemanticProperties.Hint="Actualizar"
                     Text="Actualizar"/>
+
+                <Button 
+                    Text="Eliminar Cuenta"
+                    TextColor="White"
+                    BackgroundColor="Red"
+                    Clicked="btnEliminarCuenta_Clicked"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"/>
             </VerticalStackLayout>
         </ScrollView>
     </AbsoluteLayout>

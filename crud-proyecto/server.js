@@ -91,14 +91,38 @@ app.put('/api/user/:id', authenticateToken, (req, res) => {
 //Eliminar user
 app.delete('/api/user/:id', authenticateToken, (req, res) => {
     const { id } = req.params;
-    const consulta = 'DELETE FROM user WHERE id = ?';
 
-    db.query(consulta, [id], (err, result) => {
+    // Consultas para eliminar audios y notas asociados al usuario
+    const deleteAudios = 'DELETE FROM audios WHERE userId = ?';
+    const deleteNotes = 'DELETE FROM notes WHERE user_id = ?';
+    const deleteUser = 'DELETE FROM user WHERE id = ?';
+
+    // Primero eliminar audios asociados al usuario
+    db.query(deleteAudios, [id], (err, result) => {
         if (err) {
-            res.status(500).send(err);
+            console.error("Error al eliminar los audios:", err);
+            res.status(500).json({ error: 'Error al eliminar los audios.' });
             return;
         }
-        res.status(200).send(result);
+
+        // Luego eliminar notas asociadas al usuario
+        db.query(deleteNotes, [id], (err, result) => {
+            if (err) {
+                console.error("Error al eliminar las notas:", err);
+                res.status(500).json({ error: 'Error al eliminar las notas.' });
+                return;
+            }
+
+            // Finalmente eliminar al usuario
+            db.query(deleteUser, [id], (err, result) => {
+                if (err) {
+                    console.error("Error al eliminar el usuario:", err);
+                    res.status(500).json({ error: 'Error al eliminar el usuario.' });
+                    return;
+                }
+                res.status(200).json({ message: 'Usuario, audios y notas eliminados con éxito.' });
+            });
+        });
     });
 });
 
@@ -341,5 +365,5 @@ app.delete('/api/audios/:id', authenticateToken, (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://192.168.0.3:${port}`);
+    console.log(`Servidor ejecutándose en http://192.168.0.6:${port}`);
 });

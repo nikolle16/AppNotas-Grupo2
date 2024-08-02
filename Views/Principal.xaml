@@ -112,79 +112,94 @@
                     FontAttributes="Bold"
                     TextColor="Black"/>
 
-                <Frame
-                    HeightRequest="400"
-                    BackgroundColor="#40808080">
-                    <ListView 
-                        x:Name="AudioListView"
-                        HasUnevenRows="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label 
-                                            Text="{Binding title}" 
-                                            FontAttributes="Bold" 
-                                            FontFamily="Nunito-Bold"
-                                            FontSize="16" 
-                                            Grid.Row="0" 
-                                            Grid.Column="0" 
-                                            LineBreakMode="WordWrap"
-                                            Margin="0,5,0,0"
-                                            TextColor="Black" />
-                                        <Label 
-                                            Text="{Binding audio}" 
-                                            FontAttributes="Italic" 
-                                            FontFamily="Nunito-Regular"
-                                            Margin="0,10,0,0" 
-                                            FontSize="14" 
-                                            TextColor="Black" 
-                                            Grid.Row="1" 
-                                            Grid.Column="0"/>
-                                        <Label 
-                                            Text="{Binding fecha}" 
-                                            FontFamily="Nunito-Regular"
-                                            FontSize="12" 
-                                            Margin="0,10,0,0" 
-                                            TextColor="Gray" 
-                                            Grid.Row="2" 
-                                            Grid.Column="0"/>
-                                        <ImageButton  
-                                            Margin="10,15,10,10" 
-                                            Clicked="OnCompartirAudioClicked" 
-                                            CommandParameter="{Binding .}" 
-                                            Grid.Row="3" 
-                                            Grid.Column="0"
-                                            HorizontalOptions="Start"
-                                            WidthRequest="25" 
-                                            HeightRequest="25"
-                                            Source="compartir.png"/>
-                                        <ImageButton
-                                            Margin="0,15,10,10" 
-                                            Clicked="OnEliminarAudioClicked" 
-                                            CommandParameter="{Binding .}" 
-                                            Grid.Row="3" 
-                                            Grid.Column="0" 
-                                            HorizontalOptions="End"
-                                            WidthRequest="30" 
-                                            HeightRequest="30"
-                                            Source="eliminar.png"/>
-                                        <BoxView BackgroundColor="Black" Grid.Row="3" Grid.Column="0" HeightRequest="1" Margin="0,50,0,0"/>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                <SearchBar
+                    x:Name="searchBar"
+                    Margin="10,0,10,20"
+                    Placeholder="Buscar audio..."
+                    SearchButtonPressed="searchBar_SearchButtonPressed"/>
+
+                <Frame HeightRequest="400" BackgroundColor="#40808080">
+                    <StackLayout>
+                        <Label 
+                            x:Name="EmptyMessageLabel"
+                            Text="No hay notas de audio, por favor agregue una." 
+                            FontSize="16"
+                            TextColor="Gray"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            IsVisible="False" />
+                        <ListView 
+                            x:Name="AudioListView"
+                            HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label 
+                                                Text="{Binding title}" 
+                                                FontAttributes="Bold" 
+                                                FontFamily="Nunito-Bold"
+                                                FontSize="16" 
+                                                Grid.Row="0" 
+                                                Grid.Column="0" 
+                                                LineBreakMode="WordWrap"
+                                                Margin="0,5,0,0"
+                                                TextColor="Black" />
+                                            <Label 
+                                                Text="{Binding audio}" 
+                                                FontAttributes="Italic" 
+                                                FontFamily="Nunito-Regular"
+                                                Margin="0,10,0,0" 
+                                                FontSize="14" 
+                                                TextColor="Black" 
+                                                Grid.Row="1" 
+                                                Grid.Column="0"/>
+                                            <Label 
+                                                Text="{Binding fecha}" 
+                                                FontFamily="Nunito-Regular"
+                                                FontSize="12" 
+                                                Margin="0,10,0,0" 
+                                                TextColor="Gray" 
+                                                Grid.Row="2" 
+                                                Grid.Column="0"/>
+                                            <ImageButton  
+                                                Margin="10,15,10,10" 
+                                                Clicked="OnCompartirAudioClicked" 
+                                                CommandParameter="{Binding .}" 
+                                                Grid.Row="3" 
+                                                Grid.Column="0"
+                                                HorizontalOptions="Start"
+                                                WidthRequest="25" 
+                                                HeightRequest="25"
+                                                Source="compartir.png"/>
+                                            <ImageButton
+                                                Margin="0,15,10,10" 
+                                                Clicked="OnEliminarAudioClicked" 
+                                                CommandParameter="{Binding .}" 
+                                                Grid.Row="3" 
+                                                Grid.Column="0" 
+                                                HorizontalOptions="End"
+                                                WidthRequest="30" 
+                                                HeightRequest="30"
+                                                Source="eliminar.png"/>
+                                            <BoxView BackgroundColor="Black" Grid.Row="3" Grid.Column="0" HeightRequest="1" Margin="0,50,0,0"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </Frame>
+
 
             </VerticalStackLayout>
         </ScrollView>

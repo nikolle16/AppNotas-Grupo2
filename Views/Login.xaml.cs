@@ -37,7 +37,7 @@ namespace App_Notas___Grupo_2.Views
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.password))
             {
                 Console.WriteLine($"Usuario encontrado: {user.id}");
-                SavePreferences("userId", user.id.ToString()); // Guardar el userId en las preferencias
+                SavePreferences("userId", user.id.ToString());
                 Console.WriteLine($"userId guardado en las preferencias: {user.id}");
                 return true;
             }
@@ -90,7 +90,7 @@ namespace App_Notas___Grupo_2.Views
 
         private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Principal());
+            Navigation.PushAsync(new RestPass());
         }
     }
 }

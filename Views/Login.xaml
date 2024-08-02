@@ -69,6 +69,17 @@
                 VerticalOptions="Center" 
                 IsPassword="True"/>
 
+            <Label 
+                Text="¿Has olvidado tu contraseña?"
+                TextColor="Blue" FontAttributes="Bold"
+                HorizontalOptions="Center"
+                FontSize="16"
+                Margin="10,-10,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Label.GestureRecognizers>
+            </Label>
+
             <Button
                 x:Name="btnIniSesion"
                 Margin="0,30,0,0"
