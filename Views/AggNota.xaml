@@ -16,21 +16,36 @@
             VerticalOptions="CenterAndExpand"/>
         
         <StackLayout Padding="10">
-            <Entry
-                x:Name="titleEntry" 
-                FontFamily="Nunito-Regular"
-                Margin="0,20,0,0"
-                Placeholder="Titulo"
-                PlaceholderColor="Gray"
-                FontAttributes="Bold"
-                WidthRequest="350"
-                HorizontalOptions="Center"
-                FontSize="18"
-                TextColor="Black"/>
+                <Entry
+                     x:Name="titleEntry" 
+                     FontFamily="Nunito-Regular"
+                     Margin="-65,20,0,0"
+                     Placeholder="Titulo"
+                     PlaceholderColor="Gray"
+                     FontAttributes="Bold"
+                     WidthRequest="350"
+                     HorizontalOptions="Center"
+                     FontSize="18"
+                     TextColor="Black"/>
 
-            <Editor 
+                <Entry 
+                     x:Name="FontSizeEntry" 
+                     Margin="-40,-45,-10,5"
+                     Placeholder="Tamaño de Letra" 
+                     Keyboard="Numeric" 
+                     TextColor="Black"
+                     TextChanged="OnFontSizeEntryTextChanged" 
+                     HorizontalOptions="Start"/>
+
+                <!-- Botones de estilo -->
+                <StackLayout Orientation="Horizontal" Margin="60,-45,30,5" HorizontalOptions="End">
+                    <Button Text="B" FontAttributes="Bold" Clicked="OnBoldButtonClicked" Margin="220,1,-2,0" TextColor="Black"/>
+                    <Button Text="I" FontAttributes="Italic" Clicked="OnItalicButtonClicked" Margin="8,1,20,0" TextColor="Black"/>
+                </StackLayout>
+
+                <Editor 
                 x:Name="contentEditor" 
-                Margin="10,30,10,20"
+                Margin="5,30,50,20"
                 FontSize="16"
                 Placeholder="Contenido"
                 FontFamily="Nunito-Regular"
@@ -39,12 +54,13 @@
                 TextColor="Black"/>
             <Button 
                 BackgroundColor="#40808080"
-                Margin="20,0,0,0"
+                Margin="20,0,50,0"
                 CornerRadius="25"
                 Text="Seleccionar Imagenes" 
                 FontFamily="Nunito-Regular"
                 WidthRequest="250"
                 HeightRequest="50"
+                HorizontalOptions="Center"
                 FontAttributes="Bold"
                 TextColor="Black"
                 FontSize="18"
@@ -62,7 +78,7 @@
                 FontSize="20"
                 CornerRadius="50"
                 Background="#148ba2"
-                Margin="20,0,0,0"
+                Margin="20,0,50,0"
                 Clicked="OnSaveNoteButtonClicked" />
         </StackLayout>
     </AbsoluteLayout>

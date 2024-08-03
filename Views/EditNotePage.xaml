@@ -20,20 +20,37 @@
             AbsoluteLayout.LayoutFlags="All">
 
             <Frame
-                Margin="0,-170,0,0"
-                HeightRequest="500"
+                Margin="0,0,0,0"
+                HeightRequest="700"
                 BackgroundColor="#40808080">
                 <StackLayout Padding="10">
                     <Entry
                         FontSize="22"
                         FontFamily="Nunito-Bold"
+                        Margin="-14,0,0,0"
                         x:Name="titleEntry"
                         Placeholder="Titulo" 
                         PlaceholderColor="Black"
                         TextColor="Black"/>
 
-                    <Editor 
+                    <Entry 
+                        x:Name="FontSizeEntry" 
+                        Margin="-20,10,170,0"
+                        Placeholder="Tamaño de Letra" 
+                        Keyboard="Numeric" 
+                        PlaceholderColor="Black"
+                        TextChanged="OnFontSizeEntryTextChanged" 
+                        HorizontalOptions="Center"/>
+
+                        <!-- Botones de estilo -->
+                        <StackLayout Orientation="Horizontal" Margin="60,-45,30,5" HorizontalOptions="End">
+                            <Button Text="B" FontAttributes="Bold" Clicked="OnBoldButtonClicked" Margin="0,1,-2,0" TextColor="Black"/>
+                            <Button Text="I" FontAttributes="Italic" Clicked="OnItalicButtonClicked" Margin="8,1,20,0" TextColor="Black"/>
+                        </StackLayout>
+
+                        <Editor 
                         x:Name="contentEditor" 
+                        Margin="-5,5,10,5"
                         FontFamily="Nunito-Regular"
                         FontSize="16"
                         Placeholder="Contenido" 

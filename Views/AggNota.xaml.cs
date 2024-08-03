@@ -105,6 +105,46 @@ namespace App_Notas___Grupo_2.Views
                 await DisplayAlert("Error", "Hubo un problema al guardar la nota", "OK");
             }
         }
+
+        private void OnFontSizeEntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(e.NewTextValue, out int fontSize))
+            {
+                contentEditor.FontSize = fontSize;
+            }
+            else
+            {
+                contentEditor.FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Editor));
+            }
+        }
+
+
+
+
+        // Métodos para aplicar estilos de texto
+        private void OnBoldButtonClicked(object sender, EventArgs e)
+        {
+            ToggleFontAttribute(FontAttributes.Bold);
+        }
+
+        private void OnItalicButtonClicked(object sender, EventArgs e)
+        {
+            ToggleFontAttribute(FontAttributes.Italic);
+        }
+
+        private void ToggleFontAttribute(FontAttributes attribute)
+        {
+            if (contentEditor.FontAttributes.HasFlag(attribute))
+            {
+                contentEditor.FontAttributes &= ~attribute;
+            }
+            else
+            {
+                contentEditor.FontAttributes |= attribute;
+            }
+        }
+
+
     }
 }
 
