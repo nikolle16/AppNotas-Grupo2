@@ -1,57 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Maui.Controls;
-using App_Notas___Grupo_2.Models;
 using Plugin.Maui.Audio;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
+using App_Notas___Grupo_2.Models;
 
 namespace App_Notas___Grupo_2.Views
 {
     public partial class Principal : ContentPage
     {
+        private List<Note> notes;
         private List<Audio> audios;
+
         public Principal()
         {
             InitializeComponent();
-
-            LoadNotes();
-            LoadAudioFiles();
         }
 
         protected override async void OnAppearing()
         {
             NavigationPage.SetHasBackButton(this, false);
-
             base.OnAppearing();
+
             await LoadNotes();
             await LoadAudioFiles();
-
-            var userId = Preferences.Get("userId", null);
-            if (userId == null)
-            {
-                await DisplayAlert("Error", "No se pudo obtener el ID del usuario", "OK");
-                return;
-            }
-
-            var audios = await GetAudiosAsync(userId);
-            var audiosOrdenados = audios.OrderByDescending(a => a.fecha).ToList();
-            AudioListView.ItemsSource = audiosOrdenados;
-
-            audios = await GetAudiosAsync(userId);
-            AudioListView.ItemsSource = audios;
-
-            if (audios == null || !audios.Any())
-            {
-                EmptyMessageLabel.IsVisible = true;
-            }
-            else
-            {
-                EmptyMessageLabel.IsVisible = false;
-                AudioListView.ItemsSource = audios;
-            }
         }
 
         private async void OnToolbarItemClicked(object sender, EventArgs e)
@@ -113,7 +89,7 @@ namespace App_Notas___Grupo_2.Views
                 return;
             }
 
-            var notes = await GetNotesAsync(userId);
+            notes = await GetNotesAsync(userId);
             if (notes != null)
             {
                 NotasListView.ItemsSource = notes;
@@ -127,7 +103,6 @@ namespace App_Notas___Grupo_2.Views
                 };
             }
         }
-
 
         private async Task<List<Note>> GetNotesAsync(string userId)
         {
@@ -143,7 +118,7 @@ namespace App_Notas___Grupo_2.Views
             else
             {
                 await DisplayAlert("Error", "Hubo un problema al obtener las notas", "OK");
-                return null;
+                return new List<Note>(); // Devuelve una lista vacía en caso de error.
             }
         }
 
@@ -156,10 +131,11 @@ namespace App_Notas___Grupo_2.Views
                 return;
             }
 
-            var audios = await GetAudiosAsync(userId);
+            audios = await GetAudiosAsync(userId);
             if (audios != null)
             {
-                AudioListView.ItemsSource = audios;
+                var audiosOrdenados = audios.OrderByDescending(a => a.fecha).ToList();
+                AudioListView.ItemsSource = audiosOrdenados;
                 AudioListView.ItemTapped += async (s, e) =>
                 {
                     if (e.Item is Audio selectedAudio)
@@ -187,7 +163,7 @@ namespace App_Notas___Grupo_2.Views
             else
             {
                 await DisplayAlert("Error", "Hubo un problema al obtener los audios", "OK");
-                return null;
+                return new List<Audio>(); // Devuelve una lista vacía en caso de error.
             }
         }
 
@@ -220,19 +196,8 @@ namespace App_Notas___Grupo_2.Views
             try
             {
                 var url = $"{Config.Config.EndPointDeleteAudio}/{audio.id}";
-                System.Diagnostics.Debug.WriteLine($"Delete URL: {url}");
-
                 var response = await httpClient.DeleteAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    System.Diagnostics.Debug.WriteLine($"Error eliminando audio: {errorContent}");
-                    return false;
-                }
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
@@ -260,8 +225,6 @@ namespace App_Notas___Grupo_2.Views
             if (sender is ImageButton button && button.CommandParameter is Audio audio)
             {
                 var filePath = audio.audio;
-                System.Diagnostics.Debug.WriteLine($"Ruta del archivo de audio: {filePath}");
-
                 if (System.IO.File.Exists(filePath))
                 {
                     var file = new ShareFile(filePath);
@@ -278,19 +241,42 @@ namespace App_Notas___Grupo_2.Views
             }
         }
 
-        private void searchBar_SearchButtonPressed(object sender, EventArgs e)
+        private void searchBarNotas_TextChanged(object sender, TextChangedEventArgs e)
         {
-            BuscarAudio(searchBar.Text);
+            BuscarNotas(e.NewTextValue);
+        }
+
+        private void searchBarAudio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BuscarAudio(e.NewTextValue);
+        }
+
+        private void BuscarNotas(string query)
+        {
+            if (notes != null)
+            {
+                var lowerCaseQuery = query?.ToLower();
+                var results = notes
+                    .Where(note => note.Title?.ToLower().StartsWith(lowerCaseQuery) ?? false)
+                    .ToList();
+
+                NotasListView.ItemsSource = results;
+                EmptyMessageLabel.IsVisible = !results.Any();
+            }
         }
 
         private void BuscarAudio(string query)
         {
-            var results = audios
-                .Where(audio => audio.title?.ToLowerInvariant().Contains(query.ToLowerInvariant()) == true)
-                .ToList();
+            if (audios != null)
+            {
+                var lowerCaseQuery = query?.ToLower();
+                var results = audios
+                    .Where(audio => audio.title?.ToLower().StartsWith(lowerCaseQuery) ?? false)
+                    .ToList();
 
-            AudioListView.ItemsSource = results;
+                AudioListView.ItemsSource = results;
+                EmptyMessageLabel.IsVisible = !results.Any();
+            }
         }
-
     }
 }

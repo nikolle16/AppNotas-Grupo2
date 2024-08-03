@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Notas___Grupo_2.Views.Principal"
-             Title="🍀                      EcoWrite"
+             Title="🍀 EcoWrite"
              BackgroundColor="Transparent">
 
     <ContentPage.ToolbarItems>
@@ -14,7 +14,8 @@
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>
-        
+
+        <!-- Imagen de fondo -->
         <Image
             Margin="0,-5,0,25"
             Aspect="Fill"
@@ -29,6 +30,7 @@
             AbsoluteLayout.LayoutBounds="0,0,1,1" 
             AbsoluteLayout.LayoutFlags="All">
             <VerticalStackLayout>
+                <!-- Sección de Notas de Texto -->
                 <Label Text="NOTAS DE TEXTO"
                        HorizontalOptions="Center"
                        Margin="0,0,0,10"
@@ -36,7 +38,11 @@
                        FontSize="24"
                        FontAttributes="Bold"
                        TextColor="Black"/>
-
+                <SearchBar
+                    x:Name="searchBarNotas"
+                    Margin="10,0,10,20"
+                    Placeholder="Buscar notas..."
+                    TextChanged="searchBarNotas_TextChanged"/>
                 <Frame
                     HeightRequest="400"
                     BackgroundColor="#40808080">
@@ -76,14 +82,15 @@
                                             Grid.Row="1" 
                                             Grid.Column="0"/>
                                         <Label 
-                                            FontFamily="Nunito-Regular"
-                                            Text="{Binding CreatedAt}" 
-                                            FontSize="12" 
-                                            TextColor="Gray" 
-                                            FontAttributes="Italic"
-                                            Margin="0,10,0,10" 
-                                            Grid.Row="2" 
-                                            Grid.Column="0"/>
+    FontFamily="Nunito-Regular"
+    Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yyyy}'}" 
+    FontSize="12" 
+    TextColor="Gray" 
+    FontAttributes="Italic"
+    Margin="0,10,0,10" 
+    Grid.Row="2" 
+    Grid.Column="0"/>
+
                                         <ImageButton 
                                             Margin="10,5,10,10" 
                                             Clicked="OnCompartirNotaClicked" 
@@ -102,7 +109,7 @@
                     </ListView>
                 </Frame>
 
-
+                <!-- Sección de Notas de Audio -->
                 <Label  
                     Text="NOTAS DE AUDIO"
                     HorizontalOptions="Center"
@@ -111,13 +118,11 @@
                     FontSize="24"
                     FontAttributes="Bold"
                     TextColor="Black"/>
-
                 <SearchBar
-                    x:Name="searchBar"
+                    x:Name="searchBarAudio"
                     Margin="10,0,10,20"
                     Placeholder="Buscar audio..."
-                    SearchButtonPressed="searchBar_SearchButtonPressed"/>
-
+                    TextChanged="searchBarAudio_TextChanged"/>
                 <Frame HeightRequest="400" BackgroundColor="#40808080">
                     <StackLayout>
                         <Label 
@@ -199,11 +204,10 @@
                         </ListView>
                     </StackLayout>
                 </Frame>
-
-
             </VerticalStackLayout>
         </ScrollView>
 
+        <!-- Botón para agregar notas -->
         <Button
             ImageSource="add.png"
             AbsoluteLayout.LayoutBounds="1,1,110,130"
