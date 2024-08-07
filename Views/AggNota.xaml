@@ -30,22 +30,40 @@
 
                 <Entry 
                      x:Name="FontSizeEntry" 
-                     Margin="-40,-45,-10,5"
+                     Margin="0,5,-10,5"
+                     PlaceholderColor="Gray"
                      Placeholder="Tamaño de Letra" 
+                     FontSize="15"
+                     FontFamily="Nunito-Regular"
                      Keyboard="Numeric" 
                      TextColor="Black"
                      TextChanged="OnFontSizeEntryTextChanged" 
                      HorizontalOptions="Start"/>
 
                 <!-- Botones de estilo -->
-                <StackLayout Orientation="Horizontal" Margin="60,-45,30,5" HorizontalOptions="End">
-                    <Button Text="B" FontAttributes="Bold" Clicked="OnBoldButtonClicked" Margin="220,1,-2,0" TextColor="Black"/>
-                    <Button Text="I" FontAttributes="Italic" Clicked="OnItalicButtonClicked" Margin="8,1,20,0" TextColor="Black"/>
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    Margin="60,-45,30,5" 
+                    HorizontalOptions="End">
+                    <Button 
+                        Text="B"
+                        FontAttributes="Bold"
+                        Clicked="OnBoldButtonClicked" 
+                        Margin="220,1,-2,0" 
+                        BorderColor="Black"
+                        TextColor="Black"/>
+                    <Button 
+                        Text="K"
+                        FontAttributes="Italic" 
+                        Clicked="OnItalicButtonClicked"
+                        BorderColor="Black"
+                        Margin="8,1,20,0" 
+                        TextColor="Black"/>
                 </StackLayout>
 
                 <Editor 
                 x:Name="contentEditor" 
-                Margin="5,30,50,20"
+                Margin="5,10,50,20"
                 FontSize="16"
                 Placeholder="Contenido"
                 FontFamily="Nunito-Regular"
@@ -66,7 +84,9 @@
                 FontSize="18"
                 Clicked="OnSelectImagesButtonClicked" />
             
-            <ScrollView HeightRequest="200">
+            <ScrollView 
+                HeightRequest="200"
+                HorizontalOptions="Center">
                 <StackLayout x:Name="imagesStackLayout" />
             </ScrollView>
             <Button 

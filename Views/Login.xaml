@@ -71,10 +71,11 @@
 
             <Label 
                 Text="¿Has olvidado tu contraseña?"
-                TextColor="Blue" FontAttributes="Bold"
+                TextColor="#148ba2" 
+                FontFamily="Nunito-Bold"
                 HorizontalOptions="Center"
-                FontSize="16"
-                Margin="10,-10,0,0">
+                FontSize="17"
+                Margin="0,-5,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
                 </Label.GestureRecognizers>
@@ -82,7 +83,7 @@
 
             <Button
                 x:Name="btnIniSesion"
-                Margin="0,30,0,0"
+                Margin="0,20,0,0"
                 Background="#148ba2" 
                 TextColor="#fcf2e9" 
                 FontAttributes="Bold"
@@ -97,18 +98,20 @@
 
             <Label 
                 Text="¿Aún no tienes cuenta?"
-                TextColor="Gray" FontAttributes="Bold"
+                TextColor="Gray" 
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 FontSize="16"
                 FontFamily="Nunito-Regular"
-                Margin="10,20,0,0">
+                Margin="10,10,0,0">
             </Label>
 
             <Label 
                 Text="Registrarte"
-                TextColor="Gray" FontAttributes="Bold"
+                TextColor="#148ba2" 
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
-                FontSize="16"
+                FontSize="17"
                 FontFamily="Nunito-Regular"
                 Margin="10,-10,0,0">
                 <Label.GestureRecognizers>

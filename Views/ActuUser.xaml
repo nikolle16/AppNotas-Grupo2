@@ -147,9 +147,9 @@
 
                 <Button
                     x:Name="btnActu"
-                    Margin="0,20,0,40"
-                    Background="#148ba2" 
-                    TextColor="White" 
+                    Margin="0,20,0,20"
+                    Background="#148ba2"
+                    TextColor="#fcf2e9"
                     FontAttributes="Bold"
                     FontSize="20"
                     FontFamily="Nunito-Regular"
@@ -157,17 +157,22 @@
                     HeightRequest="50"
                     CornerRadius="25"
                     Clicked="btnCrear_Clicked"
-                    HorizontalOptions="Center"
+                    HorizontalOptions="Start"
                     SemanticProperties.Hint="Actualizar"
                     Text="Actualizar"/>
 
                 <Button 
+                    Margin="0,-89.5,0,20"
                     Text="Eliminar Cuenta"
-                    TextColor="White"
-                    BackgroundColor="Red"
+                    TextColor="#fcf2e9"
+                    CornerRadius="50"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    FontSize="20"
+                    FontFamily="Nunito-Bold"
+                    BackgroundColor="#d41243"
                     Clicked="btnEliminarCuenta_Clicked"
-                    VerticalOptions="End"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="End"/>
             </VerticalStackLayout>
         </ScrollView>
     </AbsoluteLayout>
